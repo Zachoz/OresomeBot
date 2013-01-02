@@ -12,9 +12,10 @@ public class partCommand extends ListenerAdapter {
     public void onMessage(MessageEvent event) throws Exception {
 
 	
-	String channel = event.getMessage().substring(6).replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+	String channel = event.getMessage().split(" ")[1];
   if (event.getMessage().startsWith(".part") && event.getMessage().contains(channel)) {
-	    
+      if(event.getUser().getNick().equals("Zachoz|OnHoliday") 
+	      || event.getUser().getNick().equals("Zachoz")) { 
 	    OresomeBot.bot.sendRawLineNow("part" + " " + channel);
 	    event.respond("Parting " + channel);
 	} else {
@@ -27,4 +28,4 @@ public class partCommand extends ListenerAdapter {
 }
 
 }
-
+}
