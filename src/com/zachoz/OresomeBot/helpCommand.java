@@ -15,6 +15,7 @@ public class helpCommand extends ListenerAdapter {
                 OresomeBot.bot.sendMessage(event.getUser(), ".info - Show information about OresomeBot.");
                 OresomeBot.bot.sendMessage(event.getUser(), ".tell <User> <Message> - Leave a message for another user.");
                 OresomeBot.bot.sendMessage(event.getUser(), ".seen <User> - Show when a user was last seen.");
+                OresomeBot.bot.sendMessage(event.getUser(), ".help - PM you the help message you're reading right now.");
                 OresomeBot.bot.sendMessage(event.getUser(), " ");
                 OresomeBot.bot.sendMessage(event.getUser(), "---------------- OP/voiced user commands ----------------");
                 OresomeBot.bot.sendMessage(event.getUser(), ".ban <User> - Ban a user from the IRC channel.");
