@@ -1,4 +1,5 @@
-package com.zachoz.OresomeBot;
+package com.zachoz.OresomeBot.commands;
+
 
 import org.pircbotx.Channel;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -6,19 +7,23 @@ import org.pircbotx.hooks.events.*;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class banCommand extends ListenerAdapter {
+public class kickbanCommand extends ListenerAdapter {
+
+    
+  
     
 
 
     public void onMessage(MessageEvent event) throws Exception {
 	 Channel currentchannel = event.getChannel();
-
+	
+	
     
 	 
 	
 	 String userarg = event.getMessage().split(" ")[1];
 	 
-	  if (event.getMessage().startsWith(".ban") && event.getMessage().contains(userarg))   {
+	  if (event.getMessage().startsWith("!kickban") && event.getMessage().contains(userarg))   {
 	 
 	    
 	      
@@ -30,8 +35,9 @@ public class banCommand extends ListenerAdapter {
 	   
 	      
 	      OresomeBot.bot.ban(currentchannel, userarg);
+	      OresomeBot.bot.sendRawLine("kick " + event.getChannel().getName() + " " + userarg + " " + "Banned" );
 
-	    event.respond("Banning: " + userarg);
+	    event.respond("Banned and kicked: " + userarg);
 
 	 
 	 

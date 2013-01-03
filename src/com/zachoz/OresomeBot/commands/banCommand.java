@@ -1,5 +1,4 @@
-package com.zachoz.OresomeBot;
-
+package com.zachoz.OresomeBot.commands;
 
 import org.pircbotx.Channel;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -7,21 +6,19 @@ import org.pircbotx.hooks.events.*;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class unbanCommand extends ListenerAdapter {
-
+public class banCommand extends ListenerAdapter {
     
 
 
     public void onMessage(MessageEvent event) throws Exception {
 	 Channel currentchannel = event.getChannel();
-	
 
     
 	 
 	
 	 String userarg = event.getMessage().split(" ")[1];
 	 
-	  if (event.getMessage().startsWith(".unban") && event.getMessage().contains(userarg))   {
+	  if (event.getMessage().startsWith(".ban") && event.getMessage().contains(userarg))   {
 	 
 	    
 	      
@@ -32,15 +29,14 @@ public class unbanCommand extends ListenerAdapter {
 
 	   
 	      
-		  OresomeBot.bot.sendRawLine("mode" + " " + event.getChannel().getName() + " -b " + userarg);
+	      OresomeBot.bot.ban(currentchannel, userarg);
 
-	    event.respond("Unbanning: " + userarg);
-	   
+	    event.respond("Banning: " + userarg);
 
 	 
 	 
 	  } else {
-	     event.respond("Only operators and voiced users may unban users.");
+	     event.respond("Only operators and voiced users may place bans.");
 	  }
    
 }

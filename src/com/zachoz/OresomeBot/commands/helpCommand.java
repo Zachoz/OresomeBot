@@ -1,7 +1,9 @@
-package com.zachoz.OresomeBot;
+package com.zachoz.OresomeBot.commands;
 
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
+
+import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
 public class helpCommand extends ListenerAdapter {

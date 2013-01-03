@@ -1,4 +1,4 @@
-package com.zachoz.OresomeBot;
+package com.zachoz.OresomeBot.commands;
 
 
 import org.pircbotx.hooks.ListenerAdapter;

@@ -1,4 +1,4 @@
-package com.zachoz.OresomeBot;
+package com.zachoz.OresomeBot.commands;
 
 
 import org.pircbotx.Channel;
@@ -7,23 +7,21 @@ import org.pircbotx.hooks.events.*;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class kickbanCommand extends ListenerAdapter {
+public class unbanCommand extends ListenerAdapter {
 
-    
-  
     
 
 
     public void onMessage(MessageEvent event) throws Exception {
 	 Channel currentchannel = event.getChannel();
 	
-	
+
     
 	 
 	
 	 String userarg = event.getMessage().split(" ")[1];
 	 
-	  if (event.getMessage().startsWith("!kickban") && event.getMessage().contains(userarg))   {
+	  if (event.getMessage().startsWith(".unban") && event.getMessage().contains(userarg))   {
 	 
 	    
 	      
@@ -34,15 +32,15 @@ public class kickbanCommand extends ListenerAdapter {
 
 	   
 	      
-	      OresomeBot.bot.ban(currentchannel, userarg);
-	      OresomeBot.bot.sendRawLine("kick " + event.getChannel().getName() + " " + userarg + " " + "Banned" );
+		  OresomeBot.bot.sendRawLine("mode" + " " + event.getChannel().getName() + " -b " + userarg);
 
-	    event.respond("Banned and kicked: " + userarg);
+	    event.respond("Unbanning: " + userarg);
+	   
 
 	 
 	 
 	  } else {
-	     event.respond("Only operators and voiced users may place bans.");
+	     event.respond("Only operators and voiced users may unban users.");
 	  }
    
 }

@@ -2,6 +2,8 @@ package com.zachoz.OresomeBot;
 
 import org.pircbotx.PircBotX;
 
+import com.zachoz.OresomeBot.commands.*;
+
 public class OresomeBot {
     
  /*
@@ -12,7 +14,7 @@ public class OresomeBot {
     }
 
 */
-    static PircBotX bot = new PircBotX();
+    public static PircBotX bot = new PircBotX();
     public static void main(String[] args) throws Exception {
  
         
