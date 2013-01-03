@@ -19,6 +19,8 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new Hello());
         bot.getListenerManager().addListener(new joinCommand());
         bot.getListenerManager().addListener(new partCommand());
+        bot.getListenerManager().addListener(new banCommand());
+        bot.getListenerManager().addListener(new kickCommand());
         
         // Bot configuration.
         bot.setVersion("OresomeBotv2");
