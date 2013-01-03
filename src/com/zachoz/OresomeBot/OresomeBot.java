@@ -28,6 +28,9 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new muteCommand());
         bot.getListenerManager().addListener(new helpCommand());
         bot.getListenerManager().addListener(new infoCommand());
+        bot.getListenerManager().addListener(new sayCommand());
+        
+        // Bot details will be defined via a config file in the future.
         
         // Bot configuration.
         bot.setVersion("OresomeBotv2");
