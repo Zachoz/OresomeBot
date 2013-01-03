@@ -1,4 +1,4 @@
-OresomeBot
+OresomeBot | IRC Bot
 ==========
 
 OresomeBot is an IRC bot designed for primary use in OresomeCraft IRC channels as well as a few others.
