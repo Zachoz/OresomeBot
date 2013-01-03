@@ -18,14 +18,11 @@ public class partCommand extends ListenerAdapter {
 	      || event.getUser().getNick().equals("Zachoz")) { 
 	    OresomeBot.bot.sendRawLineNow("part" + " " + channel);
 	    event.respond("Parting " + channel);
-	} else {
-	    //Nope.
+	    } else {
+		// Nope.
+	    }
+
 	}
-	 
 
-
-
-}
-
-}
+    }
 }

@@ -34,11 +34,14 @@ public class OresomeBot {
         bot.setLogin("OresomeBotv2");
         bot.setName("OresomeBotv2");
         bot.connect("irc.freenode.net");
+        bot.setVerbose(true);
         
         // Channels to auto-join.
         bot.joinChannel("#oresomecraft");
         bot.joinChannel("#oresomecraft-chat");
-        bot.setVerbose(true);
+        bot.joinChannel("#OresomeBot");
+        bot.joinChannel("#Zachoz");
+        
 
 }
 
