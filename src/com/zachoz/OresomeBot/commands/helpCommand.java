@@ -30,6 +30,7 @@ public class helpCommand extends ListenerAdapter {
                 OresomeBot.bot.sendMessage(event.getUser(), "---------------- Bot Admin only commands ----------------");
                 OresomeBot.bot.sendMessage(event.getUser(), ".join <Channel> - Join an IRC channel.");
                 OresomeBot.bot.sendMessage(event.getUser(), ".part <Channel> - Leave an IRC channel.");
+                OresomeBot.bot.sendMessage(event.getUser(), ".say <Channel> <Message> - Say a message as the bot in a channel.");
                 OresomeBot.bot.sendMessage(event.getUser(), " ");
                 OresomeBot.bot.sendMessage(event.getUser(), "---------------- OresomeBot IRC Bot Help ----------------");
 	}
