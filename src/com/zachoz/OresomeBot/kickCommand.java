@@ -1,12 +1,7 @@
 package com.zachoz.OresomeBot;
 
 
-
-
-import java.util.Set;
-
 import org.pircbotx.Channel;
-import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.*;
 import com.zachoz.OresomeBot.OresomeBot;
@@ -28,7 +23,7 @@ public class kickCommand extends ListenerAdapter {
 	 
 	      
 	      
-	    User user = event.getUser();
+	 
 	    
 	   // Set<User> user = OresomeBot.bot.getUsers(event.getChannel());
 	   
@@ -37,16 +32,15 @@ public class kickCommand extends ListenerAdapter {
 
 	   String kickReason = "Kick request by " + event.getUser();
 	      
-	   OresomeBot.bot.kick(event.getChannel(), jj, kickReason);
-	                                          //Error here.
-	      //OresomeBot.bot.sendRawLine("kick " + event.getChannel() + userarg  + kickReason );
+	                                          
+	      OresomeBot.bot.sendRawLine("kick " + event.getChannel().getName() + " " + userarg + " " + kickReason );
 
 	    event.respond("Kicked: " + userarg);
 
 	 
 	 
 	  } else {
-	     event.respond("Only operators nd voiced users may place bans.");
+	     event.respond("Only operators and voiced users may kick users.");
 	  }
    
 }
