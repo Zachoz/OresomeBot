@@ -21,7 +21,7 @@ public class joinCommand extends ListenerAdapter {
 	      if(event.getUser().getNick().equals("Zachoz|OnHoliday") 
 	      || event.getUser().getNick().equals("Zachoz")) { 
 
-	      OresomeBot.bot.sendRawLine("join" + " " + channelarg);
+	      OresomeBot.bot.sendRawLineNow("join" + " " + channelarg);
 
 	    event.respond("Attempted to join channel " + channelarg);
 

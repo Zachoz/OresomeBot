@@ -20,7 +20,7 @@ public class kickCommand extends ListenerAdapter {
 	 
 	   String kickReason = "Kick request by " + event.getUser();
 	                                       
-	      OresomeBot.bot.sendRawLine("kick " + event.getChannel().getName() + " " + userarg + " " + kickReason );
+	      OresomeBot.bot.sendRawLineNow("kick " + event.getChannel().getName() + " " + userarg + " " + kickReason );
 
 	    event.respond("Kicked: " + userarg);
 

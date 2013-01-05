@@ -6,14 +6,7 @@ import com.zachoz.OresomeBot.commands.*;
 
 public class OresomeBot {
     
- /*
-    joinCommand jc;
-    
-    public OresomeBot(joinCommand joinc) {
-	jc = joinc;
-    }
 
-*/
     public static PircBotX bot = new PircBotX();
     public static void main(String[] args) throws Exception {
  
@@ -33,10 +26,11 @@ public class OresomeBot {
         // Bot details will be defined via a config file in the future.
         
         // Bot configuration.
-        bot.setVersion("OresomeBotv2");
-        bot.setLogin("OresomeBotv2");
-        bot.setName("OresomeBotv2");
+        bot.setVersion("OresomeBot v2");
+        bot.setLogin("OresomeBot");
+        bot.setName("OresomeBot-Test");
         bot.connect("irc.freenode.net");
+        bot.identify("Fuck You.");
         bot.setVerbose(true);
         
         // Channels to auto-join.
@@ -44,14 +38,7 @@ public class OresomeBot {
         bot.joinChannel("#oresomecraft-chat");
         bot.joinChannel("#OresomeBot");
         bot.joinChannel("#Zachoz");
-        
+
+    }
 
 }
-
-
-
-
-}
-    
-
-

@@ -20,7 +20,7 @@ public class muteCommand extends ListenerAdapter {
 
 	      if(currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser()) ) { 
 
-		  OresomeBot.bot.sendRawLine("mode" + " " + event.getChannel().getName() + " +q " + userarg);
+		  OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " +q " + userarg);
 
 	          event.respond("Muted: " + userarg);
 
@@ -32,7 +32,7 @@ public class muteCommand extends ListenerAdapter {
 
 		      if(currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser()) ) { 
 
-			  OresomeBot.bot.sendRawLine("mode" + " " + event.getChannel().getName() + " -q " + userarg);
+			  OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " -q " + userarg);
 
 		    event.respond("Unmuted: " + userarg);
 

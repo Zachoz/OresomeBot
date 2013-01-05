@@ -18,7 +18,7 @@ public class unbanCommand extends ListenerAdapter {
 
 	      if(currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser()) ) { 
 
-		  OresomeBot.bot.sendRawLine("mode" + " " + event.getChannel().getName() + " -b " + userarg);
+		  OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " -b " + userarg);
 
 	    event.respond("Unbanning: " + userarg);
 
