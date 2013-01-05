@@ -19,14 +19,17 @@ public class sayCommand extends ListenerAdapter {
 
 	if (event.getMessage().startsWith(".say") && event.getMessage().contains(channel) && event.getMessage().contains(message)) {
 		if (ArrSay.length > 2) {
-			 for (int i = 2; i < ArrSay.length; ++i) {
+		   
+			 for (int i = 2; i < ArrSay.length; i++) {
 			 outsay += ArrSay[i];
 			 if (i != ArrSay.length - 1) {
 			 outsay += " ";
 			}
 			 }
 			}
-	    OresomeBot.bot.sendRawLineNow("privmsg" + " " + channel + " " + outsay);
+	   
+	    OresomeBot.bot.sendMessage(channel, outsay);
+	
 
 	    }
 	}
