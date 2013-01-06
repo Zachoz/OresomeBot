@@ -1,5 +1,9 @@
 package com.zachoz.OresomeBot;
 
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.pircbotx.PircBotX;
 
 import com.zachoz.OresomeBot.commands.*;
@@ -7,10 +11,38 @@ import com.zachoz.OresomeBot.commands.*;
 public class OresomeBot {
     
 
+
     public static PircBotX bot = new PircBotX();
-    public static void main(String[] args) throws Exception {
- 
+    public static void main(String[] args) throws Exception, FileNotFoundException, IOException {
+
+	
+
+	
         
+     
+	try {
+	    
+	   Config.loadConfiguration(); 
+	   
+	} catch (FileNotFoundException ex) {
+	    // This needs to generate the file if it doesn't exist.
+	}
+	
+        
+        // Bot configuration.
+        bot.setVersion(Config.realname);
+        bot.setLogin(Config.user);
+        bot.setName(Config.nick);
+        bot.identify(Config.password);
+        bot.setVerbose(true);
+        bot.connect(Config.server, Config.port); 
+        
+       
+    
+        for (int i = 0 ; i < Config.channels.length; i++ ) {
+           bot.joinChannel(Config.channels[i]);
+         }
+
         bot.getListenerManager().addListener(new Hello());
         bot.getListenerManager().addListener(new joinCommand());
         bot.getListenerManager().addListener(new partCommand());
@@ -22,23 +54,12 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new helpCommand());
         bot.getListenerManager().addListener(new infoCommand());
         bot.getListenerManager().addListener(new sayCommand());
-        
-        // Bot details will be defined via a config file in the future.
-        
-        // Bot configuration.
-        bot.setVersion("OresomeBot v2");
-        bot.setLogin("OresomeBot");
-        bot.setName("OresomeBot-Test");
-        bot.connect("irc.freenode.net");
-        bot.identify("Fuck You.");
-        bot.setVerbose(true);
-        
-        // Channels to auto-join.
-        bot.joinChannel("#oresomecraft");
-        bot.joinChannel("#oresomecraft-chat");
-        bot.joinChannel("#OresomeBot");
-        bot.joinChannel("#Zachoz");
-
+        bot.getListenerManager().addListener(new reloadCommand());
+        bot.getListenerManager().addListener(new nickCommand());
     }
+    
+
+
 
 }
+
