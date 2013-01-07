@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.zachoz.OresomeBot.Database.MySQL;
+
 public class Config  {
 
     public static Properties config = new Properties();
@@ -16,6 +18,13 @@ public class Config  {
     static String realname;
     static String[] channels;
     public static String[] admins;
+   
+    static String mysql_host;
+    static String mysql_db;
+    static String mysql_user;
+    static String mysql_password;
+    static String mysql_port;
+    public static MySQL mysql;
 
     public static void loadConfiguration() throws FileNotFoundException, IOException {
 	config.load(new FileInputStream("OresomeBot.properties"));
@@ -27,6 +36,14 @@ public class Config  {
 	channels = config.getProperty("channels").split(",");
 	realname = config.getProperty("realname");
 	admins = config.getProperty("admins").split(",");
+	
+	
+	mysql_host = config.getProperty("mysql_host");
+	mysql_db = config.getProperty("mysql_db");
+	mysql_user = config.getProperty("mysql_user");
+	mysql_password = config.getProperty("mysql_password");
+	mysql_port = config.getProperty("mysql_port");
+	
 
     }
 }
