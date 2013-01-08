@@ -8,8 +8,10 @@ import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
 public class nickCommand extends ListenerAdapter {
+    
 
     public void onMessage(MessageEvent event) {
+	if (event.getMessage().split(" ").length > 1) {
 	 String nickname = event.getMessage().split(" ")[1];
 	  if (event.getMessage().startsWith(".nick") && event.getMessage().contains(nickname)) {
 	      String admin = "";
@@ -23,5 +25,6 @@ public class nickCommand extends ListenerAdapter {
 	}
     }
 
+}
 }
 }

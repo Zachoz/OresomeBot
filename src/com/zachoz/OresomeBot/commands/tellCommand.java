@@ -1,6 +1,6 @@
 package com.zachoz.OresomeBot.commands;
 
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 
 import org.pircbotx.hooks.ListenerAdapter;
@@ -12,6 +12,7 @@ import com.zachoz.OresomeBot.OresomeBot;
 public class tellCommand extends ListenerAdapter {
   
     public void onMessage(MessageEvent event) throws SQLException {
+	if (event.getMessage().split(" ").length > 1) {
 
 	
 	String message = event.getMessage();
@@ -23,13 +24,15 @@ public class tellCommand extends ListenerAdapter {
 	if (event.getMessage().startsWith(".tell") && event.getMessage().contains(user) && event.getMessage().contains(message)) {
 		if (ArrSay.length > 2) {
 		   
-			 for (int i = 2; i < ArrSay.length; i++) {
-			 outsay += ArrSay[i];
-			 if (i != ArrSay.length - 1) {
-			 outsay += " ";
+		    for (int i = 2; i < ArrSay.length; i++) {
+			
+			outsay += ArrSay[i];
+			
+			if (i != ArrSay.length - 1) {
+			outsay += " ";
 			}
-			 }
-			}
+		    }
+		
 		
 		OresomeBot.mysql.open();
 
@@ -50,6 +53,8 @@ public class tellCommand extends ListenerAdapter {
 
 
     }
+}
+}
    
 	
     

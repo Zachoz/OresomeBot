@@ -11,6 +11,7 @@ import com.zachoz.OresomeBot.OresomeBot;
 public class joinCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
+	if (event.getMessage().split(" ").length > 1) {
 
 	 if (event.getMessage().equals(".join")) {
  
@@ -33,7 +34,7 @@ public class joinCommand extends ListenerAdapter {
 	    event.respond("Attempted to join channel " + channelarg);
 
 	  } 
-
+	  }
 	}
 	  
 	  

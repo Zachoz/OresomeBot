@@ -10,6 +10,7 @@ import com.zachoz.OresomeBot.OresomeBot;
 public class unbanCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
+	if (event.getMessage().split(" ").length > 1) {
 	 Channel currentchannel = event.getChannel();
 
 	 String userarg = event.getMessage().split(" ")[1];
@@ -25,7 +26,7 @@ public class unbanCommand extends ListenerAdapter {
 	    }
 
 	}
-
+	}
     }
 
 }

@@ -10,6 +10,7 @@ import com.zachoz.OresomeBot.OresomeBot;
 public class deautoopCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
+	if (event.getMessage().split(" ").length > 1) {
 
 	 String user = event.getMessage().split(" ")[1];
 	 String currentchannel = event.getChannel().getName();
@@ -33,6 +34,7 @@ public class deautoopCommand extends ListenerAdapter {
 	  
 	  
     }
+}
 }
 
 

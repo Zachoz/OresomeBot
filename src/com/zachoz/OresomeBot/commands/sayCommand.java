@@ -10,6 +10,7 @@ import com.zachoz.OresomeBot.OresomeBot;
 public class sayCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) {
+	if (event.getMessage().split(" ").length > 1) {
 	
 	String admin = "";
 	      for (int i = 0 ; i < Config.admins.length; i++ ) {
@@ -41,5 +42,6 @@ public class sayCommand extends ListenerAdapter {
 	    }
 	}
 
+    }
     }
 }

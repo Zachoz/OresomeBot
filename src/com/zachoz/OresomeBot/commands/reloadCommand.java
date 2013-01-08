@@ -12,6 +12,7 @@ import com.zachoz.OresomeBot.Config;
 public class reloadCommand extends ListenerAdapter {
     
     public void onMessage(MessageEvent event) throws Exception {
+	if (event.getMessage().split(" ").length > 1) {
 
   	  if (event.getMessage().equals(".reload")) {
   	      
@@ -33,6 +34,7 @@ public class reloadCommand extends ListenerAdapter {
 
   	    event.respond("Reloading configuration.");
 
+  	  }
   	  }
 
 	}

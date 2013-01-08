@@ -16,52 +16,31 @@ public class RelayTellMessages extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws SQLException {
         String currentchannel = event.getChannel().getName();
-	String speaker = event.getUser().getNick();
-	OresomeBot.mysql.open();
-	ResultSet speakinguser = OresomeBot.mysql.query("SELECT recipient FROM tellmessages WHERE recipient='" + speaker + "'");
-	speakinguser.next();
-	String speakinguserResult = speakinguser.getString("recipient");
-  
-	if (speaker.equals(speakinguserResult)) {
+        String speaker = event.getUser().getNick();
+        OresomeBot.mysql.open();
+        ResultSet rs = OresomeBot.mysql.query("SELECT * FROM tellmessages WHERE recipient='" + speaker + "'");
+      
+        if (rs.next()) { // if they actually have a result set and move it to the first row
+            // we got the first one, output the message
+            //Integer id = new Integer(rs.getInt("id"));
+            //String name = new String(rs.getString("recipient"));
+            String sender = new String(rs.getString("sender"));
+            String message = new String(rs.getString("message"));
+            String messages = "[Message] Message from " + sender + " : " + message;
+            event.respond(messages);
+            OresomeBot.mysql.query("DELETE FROM tellmessages WHERE recipient='" + speaker + "'");
+            // while there are more messages, send them
+            while (rs.next()) {
+                //id = rs.getInt("id");
+                //name = rs.getString("recipient");
+                sender = rs.getString("sender");
+                message = rs.getString("message");
+                messages = "[Message] Message from " + sender + ": " + message;
+                event.respond(messages);
+               OresomeBot.mysql.query("DELETE FROM tellmessages WHERE recipient='" + speaker + "'");
+            }
+        }
+        OresomeBot.mysql.close();
 
-	    ResultSet getRecipient = OresomeBot.mysql.query("SELECT recipient FROM tellmessages WHERE recipient='" + speaker + "'");
-	    getRecipient.next();
-	    String getRecipientResult = getRecipient.getString("recipient");
-	    
-	    ResultSet getSender = OresomeBot.mysql.query("SELECT sender FROM tellmessages WHERE recipient='" + speaker + "'");
-	    getSender.next();
-	    
-	    ResultSet getMessage = OresomeBot.mysql.query("SELECT message FROM tellmessages WHERE recipient='" + speaker + "'");
-	    getMessage.next();
-	    
-	   
-	    while(speakinguser.next()){
-		
-	
-		 Integer id = new Integer(speakinguser.getInt("id"));
-		 String name = new String(speakinguser.getString("recipient"));
-		 String sender = new String(speakinguser.getString("sender"));
-		 String message = new String(speakinguser.getString("message"));
-
-		    String getMessageResult = getMessage.getString("message");
-		    String getSenderResult = getSender.getString("sender");
-		 
-		    
-		    
-		 
-		   String messages = "[Message] Message from " + getSenderResult + " : " + getMessageResult;
-	    event.respond(messages);
-		}
-	    
-	  
-	    
-	   OresomeBot.mysql.close();
-	
-	} else {
-	    
-	    
-	}
-	
-  }
-
+}
 }

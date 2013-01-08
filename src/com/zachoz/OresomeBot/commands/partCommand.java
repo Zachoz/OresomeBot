@@ -12,6 +12,7 @@ public class partCommand extends ListenerAdapter {
     
  
     public void onMessage(MessageEvent event) throws Exception {
+	if (event.getMessage().split(" ").length > 1) {
 
 	
 	String channel = event.getMessage().split(" ")[1];
@@ -30,4 +31,5 @@ public class partCommand extends ListenerAdapter {
 	}
 
     }
+}
 }
