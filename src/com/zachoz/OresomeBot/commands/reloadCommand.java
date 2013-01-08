@@ -33,9 +33,7 @@ public class reloadCommand extends ListenerAdapter {
 
   	    event.respond("Reloading configuration.");
 
-  	  } else {
-  	     event.respond("Only bot admins may do that.");
-	    }
+  	  }
 
 	}
 

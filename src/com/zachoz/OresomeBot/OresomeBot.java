@@ -54,7 +54,7 @@ public class OresomeBot {
            bot.joinChannel(Config.channels[i]);
          }
 
-        bot.getListenerManager().addListener(new Hello());
+        bot.getListenerManager().addListener(new RelayTellMessages());
         bot.getListenerManager().addListener(new joinCommand());
         bot.getListenerManager().addListener(new partCommand());
         bot.getListenerManager().addListener(new banCommand());
@@ -68,6 +68,10 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new reloadCommand());
         bot.getListenerManager().addListener(new nickCommand());
         bot.getListenerManager().addListener(new tellCommand());
+        bot.getListenerManager().addListener(new autoopCommand());
+        bot.getListenerManager().addListener(new deautoopCommand());
+        bot.getListenerManager().addListener(new autovoiceCommand());
+        bot.getListenerManager().addListener(new deautovoiceCommand());
     }
 
   

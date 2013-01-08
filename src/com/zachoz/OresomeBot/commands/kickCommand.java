@@ -38,9 +38,7 @@ public class kickCommand extends ListenerAdapter {
 
 
 
-	  } else {
-	     event.respond("Only operators and voiced users may kick users.");
-	    }
+	  } 
 
 	}
 

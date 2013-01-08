@@ -21,9 +21,7 @@ public class banCommand extends ListenerAdapter {
 
 	    event.respond("Banning: " + userarg);
 
-	  } else {
-	     event.respond("Only operators and voiced users may place bans.");
-	    }
+	  } 
 
 	}
 

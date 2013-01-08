@@ -22,8 +22,6 @@ public class unbanCommand extends ListenerAdapter {
 
 	    event.respond("Unbanning: " + userarg);
 
-	    } else {
-		event.respond("Only operators and voiced users may unban users.");
 	    }
 
 	}

@@ -25,9 +25,7 @@ public class partCommand extends ListenerAdapter {
 	      
 	    OresomeBot.bot.sendRawLineNow("part" + " " + channel);
 	    event.respond("Parting " + channel);
-	    } else {
-		// Nope.
-	    }
+	    } 
 
 	}
 

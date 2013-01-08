@@ -1,6 +1,5 @@
 package com.zachoz.OresomeBot.commands;
 
-
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.*;
 
@@ -8,17 +7,13 @@ import com.zachoz.OresomeBot.Config;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class joinCommand extends ListenerAdapter {
+public class autovoiceCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 
-	 if (event.getMessage().equals(".join")) {
- 
-		    event.respond("Please specify a channel to join.");
-		 } 
-
-	 String channelarg = event.getMessage().split(" ")[1];
-	  if (event.getMessage().startsWith(".join") && event.getMessage().contains(channelarg)) {
+	 String user = event.getMessage().split(" ")[1];
+	 String currentchannel = event.getChannel().getName();
+	  if (event.getMessage().startsWith(".autovoice") && event.getMessage().contains(user)) {
 	      
 	      String admin = "";
 	      for (int i = 0 ; i < Config.admins.length; i++ ) {
@@ -27,12 +22,12 @@ public class joinCommand extends ListenerAdapter {
 	      
 	  
 		  if(admin.contains(event.getUser().getNick())) { 
-	      OresomeBot.bot.sendRawLineNow("join" + " " + channelarg);
+	      OresomeBot.bot.sendMessage("ChanServ", "flags " + currentchannel + " " + user +" +V ");
 	      
 
-	    event.respond("Attempted to join channel " + channelarg);
+	    event.respond("Attempted set ChanServ flag +V on " + user);
 
-	  } 
+	  }
 
 	}
 	  

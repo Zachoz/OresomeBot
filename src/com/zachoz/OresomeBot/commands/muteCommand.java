@@ -36,9 +36,7 @@ public class muteCommand extends ListenerAdapter {
 
 		    event.respond("Unmuted: " + userarg);
 
-		  } else {
-		     event.respond("Only operators and voiced users may unmute users.");
-	    }
+		  } 
 
 	}
 

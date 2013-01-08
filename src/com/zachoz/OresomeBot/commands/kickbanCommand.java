@@ -23,9 +23,7 @@ public class kickbanCommand extends ListenerAdapter {
 
 	    event.respond("Banned and kicked: " + userarg);
 
-	  } else {
-	     event.respond("Only operators and voiced users may place bans.");
-	    }
+	  } 
 
 	}
 
