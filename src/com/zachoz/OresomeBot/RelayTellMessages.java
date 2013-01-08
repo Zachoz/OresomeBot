@@ -28,7 +28,6 @@ public class RelayTellMessages extends ListenerAdapter {
             String message = new String(rs.getString("message"));
             String messages = "[Message] Message from " + sender + " : " + message;
             event.respond(messages);
-            OresomeBot.mysql.query("DELETE FROM tellmessages WHERE recipient='" + speaker + "'");
             // while there are more messages, send them
             while (rs.next()) {
                 //id = rs.getInt("id");
@@ -37,9 +36,9 @@ public class RelayTellMessages extends ListenerAdapter {
                 message = rs.getString("message");
                 messages = "[Message] Message from " + sender + ": " + message;
                 event.respond(messages);
-               OresomeBot.mysql.query("DELETE FROM tellmessages WHERE recipient='" + speaker + "'");
             }
         }
+        OresomeBot.mysql.query("DELETE FROM tellmessages WHERE recipient='" + speaker + "'");
         OresomeBot.mysql.close();
 
 }
