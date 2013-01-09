@@ -1,8 +1,3 @@
-/*
- * Yes, I know this doesn't work properly. But it _kinda_ works...
- * 
- */
-
 package com.zachoz.OresomeBot;
 
 import java.sql.ResultSet;
