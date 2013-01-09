@@ -12,7 +12,7 @@ Keep in mind that OresomeBot is a private project and is coded specifcally for o
 
 To do:
 ==========
-* Add .tell
 * Add .seen
-* Add youtube link grabber
+* Add link grabber
+* Add youtube video info grabber
 * Add cleverbot functionality (maybe)
