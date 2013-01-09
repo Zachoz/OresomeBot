@@ -22,17 +22,24 @@ public class tellCommand extends ListenerAdapter {
 	String outsay = "";
 
 	if (event.getMessage().startsWith(".tell") && event.getMessage().contains(user) && event.getMessage().contains(message)) {
-		if (ArrSay.length > 2) {
-		   
-		    for (int i = 2; i < ArrSay.length; i++) {
-			
-			outsay += ArrSay[i];
-			
-			if (i != ArrSay.length - 1) {
-			outsay += " ";
+		for (int i = 2; i < ArrSay.length; i++) {
+		    if (ArrSay[i].contains("'")) {
+			String temp = "";
+			String temp2 = ArrSay[i];
+			for (int j = 0; j < temp2.length(); j++) {
+			    String temp3 = "" + temp2.charAt(j);
+			    if (!temp3.equals("'")) {
+				temp += temp3;
+			    }
 			}
+			outsay += temp;
+		    } else {
+			outsay += ArrSay[i];
 		    }
-		
+		    if (i != ArrSay.length - 1) {
+			outsay += " ";
+		    }
+		}
 		
 		OresomeBot.mysql.open();
 
@@ -54,7 +61,7 @@ public class tellCommand extends ListenerAdapter {
 
     }
 }
-}
+
    
 	
     
