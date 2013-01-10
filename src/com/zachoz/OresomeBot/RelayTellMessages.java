@@ -10,7 +10,6 @@ import org.pircbotx.hooks.events.MessageEvent;
 public class RelayTellMessages extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws SQLException {
-        String currentchannel = event.getChannel().getName();
         String speaker = event.getUser().getNick();
         OresomeBot.mysql.open();
         ResultSet rs = OresomeBot.mysql.query("SELECT * FROM tellmessages WHERE recipient='" + speaker + "'");

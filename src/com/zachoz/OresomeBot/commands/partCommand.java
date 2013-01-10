@@ -7,7 +7,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import com.zachoz.OresomeBot.Config;
 import com.zachoz.OresomeBot.OresomeBot;
 @SuppressWarnings("rawtypes")
-public class partCommand extends ListenerAdapter {
+public class PartCommand extends ListenerAdapter {
 
     
  

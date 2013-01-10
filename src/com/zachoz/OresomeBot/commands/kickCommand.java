@@ -7,7 +7,7 @@ import org.pircbotx.hooks.events.*;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class kickCommand extends ListenerAdapter {
+public class KickCommand extends ListenerAdapter {
 
 	
     public void onMessage(MessageEvent event) throws Exception {

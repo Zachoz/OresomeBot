@@ -7,14 +7,12 @@ import com.zachoz.OresomeBot.Config;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class AutoopCommand extends ListenerAdapter {
+public class DeopmeCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
-	if (event.getMessage().split(" ").length > 1) {
 
-	 String user = event.getMessage().split(" ")[1];
-	 String currentchannel = event.getChannel().getName();
-	  if (event.getMessage().startsWith(".autoop") && event.getMessage().contains(user)) {
+	  if (event.getMessage().equals(".deopme")){
+	      String currentchannel = event.getChannel().getName();
 	      
 	      String admin = "";
 	      for (int i = 0 ; i < Config.admins.length; i++ ) {
@@ -23,18 +21,14 @@ public class AutoopCommand extends ListenerAdapter {
 	      
 	  
 		  if(admin.contains(event.getUser().getNick())) { 
-	      OresomeBot.bot.sendMessage("ChanServ", "flags " + currentchannel + " " + user +" +O ");
-	      
-
-	    event.respond("Attempted set ChanServ flag +O on " + user);
-
+	      OresomeBot.bot.sendRawLineNow("mode " + currentchannel + " -o" + " " + event.getUser().getNick());
+	
+	  } 
 	  }
-
 	}
 	  
 	  
-    }
-    }
+    
 }
 
 

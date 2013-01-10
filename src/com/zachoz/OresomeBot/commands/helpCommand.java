@@ -6,7 +6,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class helpCommand extends ListenerAdapter {
+public class HelpCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) {
         if (event.getMessage().equals(".help")) {

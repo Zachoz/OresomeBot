@@ -1,16 +1,19 @@
 package com.zachoz.OresomeBot;
-
+//Java imports.
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-
+//PircBotX imports.
 import org.pircbotx.PircBotX;
 
+//OresomeBot imports.
 import com.zachoz.OresomeBot.Database.MySQL;
 import com.zachoz.OresomeBot.commands.*;
 
+
 public class OresomeBot {
+   
     
 
 
@@ -28,6 +31,10 @@ public class OresomeBot {
 
     
     public static void main(String[] args) throws Exception, FileNotFoundException, IOException {
+	
+	
+
+	
 
 	try {
 	    
@@ -54,25 +61,37 @@ public class OresomeBot {
            bot.joinChannel(Config.channels[i]);
          }
 
+        bot.getListenerManager().addListener(new CleverBot());
+        bot.getListenerManager().addListener(new JoinCommand());
         bot.getListenerManager().addListener(new RelayTellMessages());
-        bot.getListenerManager().addListener(new joinCommand());
-        bot.getListenerManager().addListener(new partCommand());
-        bot.getListenerManager().addListener(new banCommand());
-        bot.getListenerManager().addListener(new unbanCommand());
-        bot.getListenerManager().addListener(new kickCommand());
-        bot.getListenerManager().addListener(new kickbanCommand());
-        bot.getListenerManager().addListener(new muteCommand());
-        bot.getListenerManager().addListener(new helpCommand());
-        bot.getListenerManager().addListener(new infoCommand());
-        bot.getListenerManager().addListener(new sayCommand());
-        bot.getListenerManager().addListener(new reloadCommand());
-        bot.getListenerManager().addListener(new nickCommand());
-        bot.getListenerManager().addListener(new tellCommand());
-        bot.getListenerManager().addListener(new autoopCommand());
-        bot.getListenerManager().addListener(new deautoopCommand());
-        bot.getListenerManager().addListener(new autovoiceCommand());
-        bot.getListenerManager().addListener(new deautovoiceCommand());
+        bot.getListenerManager().addListener(new CleverBot());
+        bot.getListenerManager().addListener(new PartCommand());
+        bot.getListenerManager().addListener(new BanCommand());
+        bot.getListenerManager().addListener(new UnbanCommand());
+        bot.getListenerManager().addListener(new KickCommand());
+        bot.getListenerManager().addListener(new KickbanCommand());
+        bot.getListenerManager().addListener(new MuteCommand());
+        bot.getListenerManager().addListener(new HelpCommand());
+        bot.getListenerManager().addListener(new InfoCommand());
+        bot.getListenerManager().addListener(new SayCommand());
+        bot.getListenerManager().addListener(new ReloadCommand());
+        bot.getListenerManager().addListener(new NickCommand());
+        bot.getListenerManager().addListener(new TellCommand());
+        bot.getListenerManager().addListener(new AutoopCommand());
+        bot.getListenerManager().addListener(new DeautoopCommand());
+        bot.getListenerManager().addListener(new AutovoiceCommand());
+        bot.getListenerManager().addListener(new DeautovoiceCommand());
+        bot.getListenerManager().addListener(new OpmeCommand());
+        bot.getListenerManager().addListener(new DeopmeCommand());
+        
+        
+       
+
+        
+        
+        
     }
+    
 
   
     private static void setupDatabase() {

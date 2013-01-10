@@ -8,7 +8,7 @@ import com.zachoz.OresomeBot.Config;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class joinCommand extends ListenerAdapter {
+public class JoinCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {

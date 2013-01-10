@@ -7,7 +7,7 @@ import com.zachoz.OresomeBot.Config;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class sayCommand extends ListenerAdapter {
+public class SayCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) {
 	if (event.getMessage().split(" ").length > 1) {

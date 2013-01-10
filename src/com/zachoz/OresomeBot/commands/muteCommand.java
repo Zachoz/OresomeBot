@@ -9,7 +9,7 @@ import org.pircbotx.hooks.events.*;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class muteCommand extends ListenerAdapter {
+public class MuteCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {

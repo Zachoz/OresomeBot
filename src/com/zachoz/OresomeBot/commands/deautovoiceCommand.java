@@ -7,7 +7,7 @@ import com.zachoz.OresomeBot.Config;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class deautovoiceCommand extends ListenerAdapter {
+public class DeautovoiceCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {

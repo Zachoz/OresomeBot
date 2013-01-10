@@ -6,7 +6,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import com.zachoz.OresomeBot.Config;
 
 @SuppressWarnings("rawtypes")
-public class infoCommand extends ListenerAdapter {
+public class InfoCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) {
         if (event.getMessage().equals(".info")) {

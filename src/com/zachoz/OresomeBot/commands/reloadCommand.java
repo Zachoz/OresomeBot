@@ -9,7 +9,7 @@ import com.zachoz.OresomeBot.Config;
 
 
 @SuppressWarnings("rawtypes")
-public class reloadCommand extends ListenerAdapter {
+public class ReloadCommand extends ListenerAdapter {
     
     public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {

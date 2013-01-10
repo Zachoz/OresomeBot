@@ -9,7 +9,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class tellCommand extends ListenerAdapter {
+public class TellCommand extends ListenerAdapter {
   
     public void onMessage(MessageEvent event) throws SQLException {
 	if (event.getMessage().split(" ").length > 1) {

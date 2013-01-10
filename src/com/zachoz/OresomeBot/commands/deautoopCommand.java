@@ -7,7 +7,7 @@ import com.zachoz.OresomeBot.Config;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class deautoopCommand extends ListenerAdapter {
+public class DeautoopCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {

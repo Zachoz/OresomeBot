@@ -7,7 +7,7 @@ import com.zachoz.OresomeBot.Config;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class nickCommand extends ListenerAdapter {
+public class NickCommand extends ListenerAdapter {
     
 
     public void onMessage(MessageEvent event) {

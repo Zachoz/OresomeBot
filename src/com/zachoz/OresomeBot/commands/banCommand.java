@@ -6,7 +6,7 @@ import org.pircbotx.hooks.events.*;
 import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
-public class banCommand extends ListenerAdapter {
+public class BanCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {
