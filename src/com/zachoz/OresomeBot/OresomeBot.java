@@ -64,7 +64,6 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new CleverBot());
         bot.getListenerManager().addListener(new JoinCommand());
         bot.getListenerManager().addListener(new RelayTellMessages());
-        bot.getListenerManager().addListener(new CleverBot());
         bot.getListenerManager().addListener(new PartCommand());
         bot.getListenerManager().addListener(new BanCommand());
         bot.getListenerManager().addListener(new UnbanCommand());
@@ -85,8 +84,7 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new DeopmeCommand());
         
         
-       
-
+ 
         
         
         
