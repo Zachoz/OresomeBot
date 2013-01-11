@@ -8,18 +8,14 @@ import java.util.logging.Logger;
 import org.pircbotx.PircBotX;
 
 //OresomeBot imports.
-import com.zachoz.OresomeBot.Database.MySQL;
+import com.zachoz.OresomeBot.Database.*;
 import com.zachoz.OresomeBot.commands.*;
 
 
 public class OresomeBot {
-   
-    
-
 
     public static PircBotX bot = new PircBotX();
     public final static Logger logger = Logger.getLogger("OresomeBot");
-    
     
     static String mysql_host;
     static String mysql_db;
@@ -28,14 +24,9 @@ public class OresomeBot {
     static String mysql_port;
     public static MySQL mysql;
     
-
-    
     public static void main(String[] args) throws Exception, FileNotFoundException, IOException {
-	
-	
-
-	
-
+ 
+	// Load properties file.
 	try {
 	    
 	   Config.loadConfiguration(); 
@@ -45,7 +36,7 @@ public class OresomeBot {
 	   
 	}
         
-        // Bot configuration.
+        // Connection.
         bot.setVersion(Config.realname);
         bot.setLogin(Config.user);
         bot.setName(Config.nick);
@@ -53,14 +44,16 @@ public class OresomeBot {
         bot.setVerbose(true);
         bot.connect(Config.server, Config.port); 
         
+        // Setup MySQL DB.
         setupDatabase();
-        
-       
-    
+
+        // Join specified channels
         for (int i = 0 ; i < Config.channels.length; i++ ) {
            bot.joinChannel(Config.channels[i]);
          }
-
+       
+        // Load all commands & other listeners.
+        bot.getListenerManager().addListener(new ReloadCommand());
         bot.getListenerManager().addListener(new CleverBot());
         bot.getListenerManager().addListener(new JoinCommand());
         bot.getListenerManager().addListener(new RelayTellMessages());
@@ -73,7 +66,6 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new HelpCommand());
         bot.getListenerManager().addListener(new InfoCommand());
         bot.getListenerManager().addListener(new SayCommand());
-        bot.getListenerManager().addListener(new ReloadCommand());
         bot.getListenerManager().addListener(new NickCommand());
         bot.getListenerManager().addListener(new TellCommand());
         bot.getListenerManager().addListener(new AutoopCommand());
@@ -82,12 +74,8 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new DeautovoiceCommand());
         bot.getListenerManager().addListener(new OpmeCommand());
         bot.getListenerManager().addListener(new DeopmeCommand());
-        
-        
- 
-        
-        
-        
+        bot.getListenerManager().addListener(new CleverbotToggleCommand());
+  
     }
     
 
