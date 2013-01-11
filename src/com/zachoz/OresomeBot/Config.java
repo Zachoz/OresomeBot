@@ -16,6 +16,7 @@ public class Config  {
     static int port;
     static String password;
     static String realname;
+    static String ghost;
     static String[] channels;
     public static String[] admins;
     static String mysql_host;
@@ -36,6 +37,7 @@ public class Config  {
 	port = Integer.parseInt(config.getProperty("port"));
 	password = config.getProperty("password");
 	channels = config.getProperty("channels").split(",");
+	ghost = config.getProperty("ghost");
 	realname = config.getProperty("realname");
 	admins = config.getProperty("admins").split(",");
 	

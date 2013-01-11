@@ -29,15 +29,12 @@ public class CleverBot extends ListenerAdapter {
 	String[] ArrSay = message.split(" ");
 	String outsay = "";
 
-	for (int i = 2; i < ArrSay.length; i++) {
+	for (int i = 1; i < ArrSay.length; i++) {
 	    outsay += ArrSay[i];
-	    if (i != ArrSay.length - 1) {
-		outsay += " ";
-	    }
 
 	}
 
-	if (event.getMessage().split(" ").length > 1) {
+	
 
 	    if (event.getMessage().startsWith(OresomeBot.bot.getNick() + ": ")) {
 		if (cleverbotEnabled == true) {
@@ -48,6 +45,6 @@ public class CleverBot extends ListenerAdapter {
 		}
 	    }
 
-	}
+	
     }
 }

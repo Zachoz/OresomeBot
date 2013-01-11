@@ -37,6 +37,7 @@ public class OresomeBot {
 	}
         
         // Connection.
+	bot.setAutoNickChange(true);
         bot.setVersion(Config.realname);
         bot.setLogin(Config.user);
         bot.setName(Config.nick);
