@@ -1,11 +1,11 @@
-package com.zachoz.AusfragBot.commands;
+package com.zachoz.OresomeBot.commands;
 
 
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import com.zachoz.AusfragBot.Config;
-import com.zachoz.AusfragBot.AusfragBot;
+import com.zachoz.OresomeBot.Config;
+import com.zachoz.OresomeBot.OresomeBot;
 @SuppressWarnings("rawtypes")
 public class PartCommand extends ListenerAdapter {
 
@@ -16,7 +16,7 @@ public class PartCommand extends ListenerAdapter {
 
 	
 	String channel = event.getMessage().split(" ")[1];
-  if (event.getMessage().startsWith("!part") && event.getMessage().contains(channel)) {
+  if (event.getMessage().startsWith(".part") && event.getMessage().contains(channel)) {
       String admin = "";
       for (int i = 0 ; i < Config.admins.length; i++ ) {
 	  admin += Config.admins[i];
@@ -24,7 +24,7 @@ public class PartCommand extends ListenerAdapter {
   
 	  if(admin.contains(event.getUser().getNick())) { 
 	      
-	    AusfragBot.bot.sendRawLineNow("part" + " " + channel);
+	    OresomeBot.bot.sendRawLineNow("part" + " " + channel);
 	    event.respond("Parting " + channel);
 	    } 
 
