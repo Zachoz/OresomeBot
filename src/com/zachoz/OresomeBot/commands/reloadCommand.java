@@ -1,11 +1,11 @@
-package com.zachoz.AusfragBot.commands;
+package com.zachoz.OresomeBot.commands;
 
 import java.io.FileNotFoundException;
 
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.*;
 
-import com.zachoz.AusfragBot.Config;
+import com.zachoz.OresomeBot.Config;
 
 @SuppressWarnings("rawtypes")
 public class ReloadCommand extends ListenerAdapter {
@@ -14,7 +14,7 @@ public class ReloadCommand extends ListenerAdapter {
 	
 
 	
-	  if (event.getMessage().equals("!reload")) {
+	  if (event.getMessage().equals(".reload")) {
 	      
 	      String admin = "";
 	      for (int i = 0 ; i < Config.admins.length; i++ ) {

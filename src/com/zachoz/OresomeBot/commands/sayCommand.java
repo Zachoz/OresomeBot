@@ -1,10 +1,10 @@
-package com.zachoz.AusfragBot.commands;
+package com.zachoz.OresomeBot.commands;
 
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import com.zachoz.AusfragBot.Config;
-import com.zachoz.AusfragBot.AusfragBot;
+import com.zachoz.OresomeBot.Config;
+import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
 public class SayCommand extends ListenerAdapter {
@@ -25,7 +25,7 @@ public class SayCommand extends ListenerAdapter {
 	String[] ArrSay = message.split(" ");
 	String outsay = "";
 
-	if (event.getMessage().startsWith("!say") && event.getMessage().contains(channel) && event.getMessage().contains(message)) {
+	if (event.getMessage().startsWith(".say") && event.getMessage().contains(channel) && event.getMessage().contains(message)) {
 		if (ArrSay.length > 2) {
 		   
 			 for (int i = 2; i < ArrSay.length; i++) {
@@ -36,7 +36,7 @@ public class SayCommand extends ListenerAdapter {
 			 }
 			}
 	   
-	    AusfragBot.bot.sendMessage(channel, outsay);
+	    OresomeBot.bot.sendMessage(channel, outsay);
 	
 
 	    }
