@@ -3,8 +3,6 @@ package com.zachoz.OresomeBot.commands;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import com.zachoz.OresomeBot.Config;
-
 @SuppressWarnings("rawtypes")
 public class InfoCommand extends ListenerAdapter {
 
