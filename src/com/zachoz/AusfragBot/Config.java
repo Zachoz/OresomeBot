@@ -1,13 +1,11 @@
-package com.zachoz.OresomeBot;
+package com.zachoz.AusfragBot;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.zachoz.OresomeBot.Database.MySQL;
-
-public class Config  {
+public class Config {
 
     public static Properties config = new Properties();
     static String nick;
@@ -24,34 +22,17 @@ public class Config  {
     static String mysql_user;
     static String mysql_password;
     static String mysql_port;
-    public static MySQL mysql;
     
-
-    
-
     public static void loadConfiguration() throws FileNotFoundException, IOException {
-	config.load(new FileInputStream("OresomeBot.properties"));
+	config.load(new FileInputStream("AusfragBot.properties"));
 	nick = config.getProperty("nick");
 	user = config.getProperty("user");
 	server = config.getProperty("server");
 	port = Integer.parseInt(config.getProperty("port"));
 	password = config.getProperty("password");
 	channels = config.getProperty("channels").split(",");
-	ghost = config.getProperty("ghost");
 	realname = config.getProperty("realname");
 	admins = config.getProperty("admins").split(",");
-	
-	mysql_host = config.getProperty("mysql_host");
-	mysql_db = config.getProperty("mysql_db");
-	mysql_user = config.getProperty("mysql_user");
-	mysql_password = config.getProperty("mysql_password");
-	mysql_port = config.getProperty("mysql_port");
-	
-
-	
-	
-
     }
-    
 
 }
