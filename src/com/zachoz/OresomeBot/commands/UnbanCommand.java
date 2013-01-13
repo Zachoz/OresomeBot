@@ -1,6 +1,5 @@
 package com.zachoz.OresomeBot.commands;
 
-
 import org.pircbotx.Channel;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.*;
@@ -11,30 +10,22 @@ public class UnbanCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {
-	 Channel currentchannel = event.getChannel();
+	    Channel currentchannel = event.getChannel();
 
-	 String userarg = event.getMessage().split(" ")[1];
-	 
-	  if (event.getMessage().startsWith(".unban") && event.getMessage().contains(userarg))   {
+	    String userarg = event.getMessage().split(" ")[1];
 
-	      if(currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser()) ) { 
+	    if (event.getMessage().startsWith(".unban") && event.getMessage().contains(userarg)) {
 
-		  OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " -b " + userarg);
+		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-	    event.respond("Unbanning: " + userarg);
+		    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " -b " + userarg);
+
+		    event.respond("Unbanning: " + userarg);
+
+		}
 
 	    }
-
-	}
 	}
     }
 
 }
-
-
-
-
-    
-
-
-

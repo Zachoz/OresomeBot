@@ -10,32 +10,23 @@ public class BanCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {
-	 Channel currentchannel = event.getChannel();
+	    Channel currentchannel = event.getChannel();
 
-	 String userarg = event.getMessage().split(" ")[1];
-	 
-	  if (event.getMessage().startsWith(".ban") && event.getMessage().contains(userarg))   {
+	    String userarg = event.getMessage().split(" ")[1];
 
-	      if(currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser()) ) { 
+	    if (event.getMessage().startsWith(".ban") && event.getMessage().contains(userarg)) {
 
-	      OresomeBot.bot.ban(currentchannel, userarg);
+		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-	    event.respond("Banning: " + userarg);
+		    OresomeBot.bot.ban(currentchannel, userarg);
 
-	  } 
+		    event.respond("Banning: " + userarg);
+
+		}
+
+	    }
 
 	}
 
     }
-
 }
-}
-    
-
-
-
-
-    
-
-
-

@@ -15,7 +15,7 @@ public class CleverBot extends ListenerAdapter {
     private ChatterBotFactory factory;
     private ChatterBot cleverbot;
     private ChatterBotSession botsession;
-    
+
     public static boolean cleverbotEnabled = true;
 
     public CleverBot() throws Exception {
@@ -34,17 +34,14 @@ public class CleverBot extends ListenerAdapter {
 
 	}
 
-	
+	if (event.getMessage().startsWith(OresomeBot.bot.getNick() + ": ")) {
+	    if (cleverbotEnabled == true) {
 
-	    if (event.getMessage().startsWith(OresomeBot.bot.getNick() + ": ")) {
-		if (cleverbotEnabled == true) {
+		String s = botsession.think(outsay);
+		event.respond(s);
 
-		    String s = botsession.think(outsay);
-		    event.respond(s);
-
-		}
 	    }
+	}
 
-	
     }
 }

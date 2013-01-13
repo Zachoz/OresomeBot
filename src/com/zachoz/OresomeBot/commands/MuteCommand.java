@@ -1,8 +1,5 @@
 package com.zachoz.OresomeBot.commands;
 
-
-
-
 import org.pircbotx.Channel;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.*;
@@ -13,37 +10,36 @@ public class MuteCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 	if (event.getMessage().split(" ").length > 1) {
-	 Channel currentchannel = event.getChannel();
+	    Channel currentchannel = event.getChannel();
 
-	 String userarg = event.getMessage().split(" ")[1];
-	 
-	  if (event.getMessage().startsWith(".mute") && event.getMessage().contains(userarg))   {
+	    String userarg = event.getMessage().split(" ")[1];
 
-	      if(currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser()) ) { 
+	    if (event.getMessage().startsWith(".mute") && event.getMessage().contains(userarg)) {
 
-		  OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " +q " + userarg);
+		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-	          event.respond("Muted: " + userarg);
+		    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " +q " + userarg);
 
-	  } else {
-	     event.respond("Only operators and voiced users may mute users.");
+		    event.respond("Muted: " + userarg);
+
+		} else {
+		    event.respond("Only operators and voiced users may mute users.");
+		}
+
 	    }
-	      
-	}  if (event.getMessage().startsWith(".unmute") && event.getMessage().contains(userarg))   {
+	    if (event.getMessage().startsWith(".unmute") && event.getMessage().contains(userarg)) {
 
-		      if(currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser()) ) { 
+		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-			  OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " -q " + userarg);
+		    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " -q " + userarg);
 
 		    event.respond("Unmuted: " + userarg);
 
-		  } 
+		}
 
-	}
+	    }
 	}
 
     }
 
 }
-
-

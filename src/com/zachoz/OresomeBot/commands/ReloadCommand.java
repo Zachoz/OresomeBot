@@ -11,36 +11,28 @@ import com.zachoz.OresomeBot.Config;
 public class ReloadCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
-	
 
-	
-	  if (event.getMessage().equals(".reload")) {
-	      
-	      String admin = "";
-	      for (int i = 0 ; i < Config.admins.length; i++ ) {
-		  admin += Config.admins[i];
-	      }
-	      
-	  
-		  if(admin.contains(event.getUser().getNick())) { 
-			    try {
-	  			    
-	  			   Config.loadConfiguration(); 
-	  			   
-	  			} catch (FileNotFoundException ex) {
-	  			    // This needs to generate the file if it doesn't exist.
-	  			}
+	if (event.getMessage().equals(".reload")) {
 
-	  	    event.respond("Reloading configuration.");
+	    String admin = "";
+	    for (int i = 0; i < Config.admins.length; i++) {
+		admin += Config.admins[i];
+	    }
 
+	    if (admin.contains(event.getUser().getNick())) {
+		try {
 
-	  }
+		    Config.loadConfiguration();
+
+		} catch (FileNotFoundException ex) {
+		    // This needs to generate the file if it doesn't exist.
+		}
+
+		event.respond("Reloading configuration.");
+
+	    }
 
 	}
-	  
-	  
+
     }
-    }
-
-
-
+}

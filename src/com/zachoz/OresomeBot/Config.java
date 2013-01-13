@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import com.zachoz.OresomeBot.Database.MySQL;
 
-public class Config  {
+public class Config {
 
     public static Properties config = new Properties();
     static String nick;
@@ -25,11 +25,9 @@ public class Config  {
     static String mysql_password;
     static String mysql_port;
     public static MySQL mysql;
-    
 
-    
-
-    public static void loadConfiguration() throws FileNotFoundException, IOException {
+    public static void loadConfiguration() throws FileNotFoundException,
+	    IOException {
 	config.load(new FileInputStream("OresomeBot.properties"));
 	nick = config.getProperty("nick");
 	user = config.getProperty("user");
@@ -40,18 +38,13 @@ public class Config  {
 	ghost = config.getProperty("ghost");
 	realname = config.getProperty("realname");
 	admins = config.getProperty("admins").split(",");
-	
+
 	mysql_host = config.getProperty("mysql_host");
 	mysql_db = config.getProperty("mysql_db");
 	mysql_user = config.getProperty("mysql_user");
 	mysql_password = config.getProperty("mysql_password");
 	mysql_port = config.getProperty("mysql_port");
-	
-
-	
-	
 
     }
-    
 
 }
