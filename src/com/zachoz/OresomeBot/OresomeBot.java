@@ -3,6 +3,7 @@ package com.zachoz.OresomeBot;
 //Java imports.
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 //PircBotX imports.
@@ -78,6 +79,7 @@ public class OresomeBot {
 	bot.getListenerManager().addListener(new DeopmeCommand());
 	bot.getListenerManager().addListener(new CleverbotToggleCommand());
 
+	endCommand();
     }
 
     private static void setupDatabase() {
@@ -97,8 +99,7 @@ public class OresomeBot {
 	    System.out.println("Successfully connected to database!");
 
 	    if (!mysql.checkTable("tellmessage")) {
-		System.out.println("Creating table 'tellmessages' in database "
-			+ mysql_db);
+		System.out.println("Creating table 'tellmessages' in database " + mysql_db);
 		mysql.createTable("CREATE TABLE tellmessages ( id int NOT NULL AUTO_INCREMENT, channel VARCHAR(32) NOT NULL, sender VARCHAR(32) NOT NULL, recipient VARCHAR(32) NOT NULL, message VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
 	    }
 	} else {
@@ -106,6 +107,18 @@ public class OresomeBot {
 		    .println("Error connecting to database, there'll most likely be a lot of console errors!!");
 	}
 	mysql.close();
+    }
+    
+    public static void endCommand() {
+	Scanner reader = new Scanner(System.in);
+	String command = reader.nextLine();
+	if (command.equals("end")) {
+	    // Yes this is dodgy, I'll fix it later, but at least the damn thing stops!
+	    bot.quitServer("Shutting down, cya later!");
+	    System.out.println("Bot shutting down! Cya!");
+	    System.exit(0);
+	}
+
     }
 
 }
