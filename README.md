@@ -10,6 +10,15 @@ Majority of OresomeBot's functions are operator functions. These functions are i
 
 Keep in mind that OresomeBot is a private project and is coded specifcally for our use. We do a lot of our functions different to how most would purely for our own convenience and to keep the code as simple as possible.
 
+Features:
+==========
+* Allow for "channel moderators" (voiced users).
+* Mod commands like .ban, .kick, !kickban, .mute, etc.
+* Channel Management commands. (Requires ChanServ flag +F or custom setup)
+* Leave messages for users.
+* Inbuilt cleverbot functions, yes, you can speak to it!
+* Easy and flexible configuration.
+
 To do:
 ==========
 * Add .seen
