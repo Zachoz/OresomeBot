@@ -60,6 +60,7 @@ public class OresomeBot {
 	bot.getListenerManager().addListener(new CleverBot());
 	bot.getListenerManager().addListener(new JoinCommand());
 	bot.getListenerManager().addListener(new RelayTellMessages());
+	bot.getListenerManager().addListener(new WelcomeMessage());
 	bot.getListenerManager().addListener(new PartCommand());
 	bot.getListenerManager().addListener(new BanCommand());
 	bot.getListenerManager().addListener(new UnbanCommand());
@@ -102,9 +103,12 @@ public class OresomeBot {
 		System.out.println("Creating table 'tellmessages' in database " + mysql_db);
 		mysql.createTable("CREATE TABLE tellmessages ( id int NOT NULL AUTO_INCREMENT, channel VARCHAR(32) NOT NULL, sender VARCHAR(32) NOT NULL, recipient VARCHAR(32) NOT NULL, message VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
 	    }
+	    if (!mysql.checkTable("oresomejoinedusers")) {
+		System.out.println("Creating table 'oresomejoinedusers' in database " + mysql_db);
+		mysql.createTable("CREATE TABLE oresomejoinedusers (id int NOT NULL AUTO_INCREMENT, users VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
+	    }
 	} else {
-	    System.out
-		    .println("Error connecting to database, there'll most likely be a lot of console errors!!");
+	    System.out.println("Error connecting to database, there'll most likely be a lot of console errors!!");
 	}
 	mysql.close();
     }
