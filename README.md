@@ -21,6 +21,5 @@ Features:
 
 To do:
 ==========
-* Add .seen
 * Add link grabber
 * Add youtube video info grabber

@@ -79,8 +79,12 @@ public class OresomeBot {
 	bot.getListenerManager().addListener(new OpmeCommand());
 	bot.getListenerManager().addListener(new DeopmeCommand());
 	bot.getListenerManager().addListener(new CleverbotToggleCommand());
+	bot.getListenerManager().addListener(new SeenManager());
+	bot.getListenerManager().addListener(new SeenCommand());
 
 	endCommand();
+	
+
     }
 
     private static void setupDatabase() {
@@ -99,13 +103,17 @@ public class OresomeBot {
 	if (mysql.checkConnection()) {
 	    System.out.println("Successfully connected to database!");
 
-	    if (!mysql.checkTable("tellmessage")) {
+	    if (!mysql.checkTable("tellmessages")) {
 		System.out.println("Creating table 'tellmessages' in database " + mysql_db);
 		mysql.createTable("CREATE TABLE tellmessages ( id int NOT NULL AUTO_INCREMENT, channel VARCHAR(32) NOT NULL, sender VARCHAR(32) NOT NULL, recipient VARCHAR(32) NOT NULL, message VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
 	    }
 	    if (!mysql.checkTable("oresomejoinedusers")) {
 		System.out.println("Creating table 'oresomejoinedusers' in database " + mysql_db);
 		mysql.createTable("CREATE TABLE oresomejoinedusers (id int NOT NULL AUTO_INCREMENT, users VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
+	    }
+	    if (!mysql.checkTable("seenusers")) {
+		System.out.println("Creating table 'seenusers' in database " + mysql_db);
+		mysql.createTable("CREATE TABLE seenusers (id int NOT NULL AUTO_INCREMENT, user VARCHAR(32) NOT NULL, lastseen VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
 	    }
 	} else {
 	    System.out.println("Error connecting to database, there'll most likely be a lot of console errors!!");
