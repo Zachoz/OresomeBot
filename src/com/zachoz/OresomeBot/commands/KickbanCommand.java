@@ -14,7 +14,7 @@ public class KickbanCommand extends ListenerAdapter {
 
 	    String userarg = event.getMessage().split(" ")[1];
 
-	    if (event.getMessage().startsWith("!kickban") && event.getMessage().contains(userarg)) {
+	    if (event.getMessage().startsWith(".kickban ") && event.getMessage().contains(userarg)) {
 
 		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 

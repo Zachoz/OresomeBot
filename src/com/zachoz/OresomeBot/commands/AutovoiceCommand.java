@@ -14,7 +14,7 @@ public class AutovoiceCommand extends ListenerAdapter {
 
 	    String user = event.getMessage().split(" ")[1];
 	    String currentchannel = event.getChannel().getName();
-	    if (event.getMessage().startsWith(".autovoice") && event.getMessage().contains(user)) {
+	    if (event.getMessage().startsWith(".autovoice ") && event.getMessage().contains(user)) {
 
 		String admin = "";
 		for (int i = 0; i < Config.admins.length; i++) {

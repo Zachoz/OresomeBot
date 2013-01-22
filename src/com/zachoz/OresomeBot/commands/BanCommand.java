@@ -14,7 +14,7 @@ public class BanCommand extends ListenerAdapter {
 
 	    String userarg = event.getMessage().split(" ")[1];
 
-	    if (event.getMessage().startsWith(".ban") && event.getMessage().contains(userarg)) {
+	    if (event.getMessage().startsWith(".ban ") && event.getMessage().contains(userarg)) {
 
 		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 

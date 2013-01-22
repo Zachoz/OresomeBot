@@ -13,7 +13,7 @@ public class PartCommand extends ListenerAdapter {
 	if (event.getMessage().split(" ").length > 1) {
 
 	    String channel = event.getMessage().split(" ")[1];
-	    if (event.getMessage().startsWith(".part") && event.getMessage().contains(channel)) {
+	    if (event.getMessage().startsWith(".part ") && event.getMessage().contains(channel)) {
 		String admin = "";
 		for (int i = 0; i < Config.admins.length; i++) {
 		    admin += Config.admins[i];

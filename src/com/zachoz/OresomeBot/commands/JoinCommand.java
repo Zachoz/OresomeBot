@@ -18,7 +18,7 @@ public class JoinCommand extends ListenerAdapter {
 	    }
 
 	    String channelarg = event.getMessage().split(" ")[1];
-	    if (event.getMessage().startsWith(".join") && event.getMessage().contains(channelarg)) {
+	    if (event.getMessage().startsWith(".join ") && event.getMessage().contains(channelarg)) {
 
 		String admin = "";
 		for (int i = 0; i < Config.admins.length; i++) {

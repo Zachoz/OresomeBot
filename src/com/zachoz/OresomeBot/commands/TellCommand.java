@@ -19,7 +19,7 @@ public class TellCommand extends ListenerAdapter {
 	    String[] ArrSay = message.split(" ");
 	    String outsay = "";
 
-	    if (event.getMessage().startsWith(".tell")
+	    if (event.getMessage().startsWith(".tell ")
 		    && event.getMessage().contains(user)
 		    && event.getMessage().contains(message)) {
 		

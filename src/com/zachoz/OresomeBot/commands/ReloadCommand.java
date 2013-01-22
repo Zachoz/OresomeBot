@@ -12,7 +12,7 @@ public class ReloadCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 
-	if (event.getMessage().equals(".reload")) {
+	if (event.getMessage().equals(".reload ")) {
 
 	    String admin = "";
 	    for (int i = 0; i < Config.admins.length; i++) {

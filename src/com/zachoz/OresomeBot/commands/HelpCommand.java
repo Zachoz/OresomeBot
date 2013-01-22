@@ -22,7 +22,7 @@ public class HelpCommand extends ListenerAdapter {
                 OresomeBot.bot.sendMessage(event.getUser(), ".ban <User> - Ban a user from the IRC channel.");
                 OresomeBot.bot.sendMessage(event.getUser(), ".unban <User> - Unban a user from the IRC channel.");
                 OresomeBot.bot.sendMessage(event.getUser(), ".kick <User> - Kick a user from the IRC channel.");
-                OresomeBot.bot.sendMessage(event.getUser(), "!kickban <User> - Kicks and bans a user from the IRC channel.");
+                OresomeBot.bot.sendMessage(event.getUser(), ".kickban <User> - Kicks and bans a user from the IRC channel.");
                 OresomeBot.bot.sendMessage(event.getUser(), ".mute <User> - Silence a user in the IRC channel.");
                 OresomeBot.bot.sendMessage(event.getUser(), ".unmute <User> - Un-silence a user in the IRC channel.");
                 OresomeBot.bot.sendMessage(event.getUser(), "---------------- Bot Admin only commands ----------------");

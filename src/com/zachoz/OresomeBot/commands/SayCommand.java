@@ -24,7 +24,7 @@ public class SayCommand extends ListenerAdapter {
 		String[] ArrSay = message.split(" ");
 		String outsay = "";
 
-		if (event.getMessage().startsWith(".say")
+		if (event.getMessage().startsWith(".say ")
 			&& event.getMessage().contains(channel)
 			&& event.getMessage().contains(message)) {
 		    if (ArrSay.length > 2) {

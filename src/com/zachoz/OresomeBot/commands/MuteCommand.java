@@ -14,7 +14,7 @@ public class MuteCommand extends ListenerAdapter {
 
 	    String userarg = event.getMessage().split(" ")[1];
 
-	    if (event.getMessage().startsWith(".mute") && event.getMessage().contains(userarg)) {
+	    if (event.getMessage().startsWith(".mute ") && event.getMessage().contains(userarg)) {
 
 		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
@@ -27,7 +27,7 @@ public class MuteCommand extends ListenerAdapter {
 		}
 
 	    }
-	    if (event.getMessage().startsWith(".unmute") && event.getMessage().contains(userarg)) {
+	    if (event.getMessage().startsWith(".unmute ") && event.getMessage().contains(userarg)) {
 
 		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 

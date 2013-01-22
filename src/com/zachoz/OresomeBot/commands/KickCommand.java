@@ -16,7 +16,7 @@ public class KickCommand extends ListenerAdapter {
 	    String[] ArrSay = message.split(" ");
 	    String outsay = "";
 
-	    if (event.getMessage().startsWith(".kick") && event.getMessage().contains(userarg)) {
+	    if (event.getMessage().startsWith(".kick ") && event.getMessage().contains(userarg)) {
 
 		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 		    if (ArrSay.length > 2) {
