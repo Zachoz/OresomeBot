@@ -46,14 +46,16 @@ public class SeenManager extends ListenerAdapter {
     }
     
     public void onMessage(MessageEvent event) {
+	OresomeBot.mysql.open();
 	String user = event.getUser().getNick();
 	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	Date date = new Date();
 	String lastseen = dateFormat.format(date);
-	
-	OresomeBot.mysql.open();
+	try {
 	OresomeBot.mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
-	OresomeBot.mysql.close();
+	} catch (Exception e){
+	    
+	}
 	
     }
 

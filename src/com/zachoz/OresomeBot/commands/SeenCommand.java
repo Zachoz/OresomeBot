@@ -25,6 +25,7 @@ public class SeenCommand extends ListenerAdapter {
 		} else {
 		    event.respond("I've never seen this user!");
 		}
+		OresomeBot.mysql.close();
 	    }
 	}
     }

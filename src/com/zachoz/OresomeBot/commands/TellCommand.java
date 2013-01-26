@@ -44,7 +44,6 @@ public class TellCommand extends ListenerAdapter {
 
 		OresomeBot.mysql.open();
 
-		if (OresomeBot.mysql.checkConnection()) {
 		    try {
 			OresomeBot.mysql.query("INSERT INTO tellmessages (channel, sender, recipient, message) VALUES ('" + channel + "', '" + event.getUser().getNick() + "', '" + user + "', '" + outsay + "') ");
 
@@ -54,7 +53,7 @@ public class TellCommand extends ListenerAdapter {
 
 		    }
 		}
-	    }
+		OresomeBot.mysql.close();
 
 	}
 

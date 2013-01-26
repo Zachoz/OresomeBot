@@ -81,8 +81,6 @@ public class OresomeBot {
 	bot.getListenerManager().addListener(new CleverbotToggleCommand());
 	bot.getListenerManager().addListener(new SeenManager());
 	bot.getListenerManager().addListener(new SeenCommand());
-
-	endCommand();
 	
 
     }
