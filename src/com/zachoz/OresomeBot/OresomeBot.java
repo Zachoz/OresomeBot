@@ -40,7 +40,7 @@ public class OresomeBot {
 
 	// Connection.
 	bot.setAutoNickChange(true);
-	bot.setVersion(Config.realname);
+	bot.setVersion("OresomeBot IRC Bot, by Zachoz.");
 	bot.setLogin(Config.user);
 	bot.setName(Config.nick);
 	bot.identify(Config.password);
@@ -83,6 +83,7 @@ public class OresomeBot {
 	bot.getListenerManager().addListener(new SeenCommand());
 	
 
+	endCommand();
     }
 
     private static void setupDatabase() {
@@ -124,7 +125,7 @@ public class OresomeBot {
 	String command = reader.nextLine();
 	if (command.equals("end")) {
 	    // Yes this is dodgy, I'll fix it later, but at least the damn thing stops!
-	    bot.quitServer("Shutting down, cya later!");
+	    bot.shutdown();
 	    System.out.println("Bot shutting down! Cya!");
 	    System.exit(0);
 	}
