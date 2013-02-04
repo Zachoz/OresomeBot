@@ -21,7 +21,8 @@ public class BanCommand extends ListenerAdapter {
 
 		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-		    OresomeBot.bot.ban(currentchannel, hostmask);
+		    //OresomeBot.bot.ban(currentchannel, hostmask);
+		    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " +b " + hostmask);
 
 		}
 

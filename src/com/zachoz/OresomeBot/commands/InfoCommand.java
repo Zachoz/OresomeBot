@@ -11,6 +11,13 @@ public class InfoCommand extends ListenerAdapter {
 
 	    event.respond("Hi, I'm OresomeBot, an IRC bot designed by Zachoz for primary use in OresomeCraft IRC channels. I'm written in Java and use the PircBotx Library. I also have various useful administrative and user commands.");
 
+	    System.out.println("DEBUG!!!!!!!!");
+	    System.out.println("DEBUG!!!!!!!!");
+	    System.out.println("DEBUG!!!!!!!!");
+	    System.out.println("DEBUG!!!!!!!!");
+	    System.out.println("DEBUG!!!!!!!!");
+	    System.out.println("DEBUG!!!!!!!!");
+	    
 	}
     }
 }

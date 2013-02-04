@@ -24,8 +24,6 @@ public class MuteCommand extends ListenerAdapter {
 		    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " +q " + hostmask);
 
 
-		} else {
-		    event.respond("Only operators and voiced users may mute users.");
 		}
 
 	    }

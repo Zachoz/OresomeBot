@@ -21,8 +21,11 @@ public class KickbanCommand extends ListenerAdapter {
 
 		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-		    OresomeBot.bot.ban(currentchannel, hostmask);
-		    OresomeBot.bot.kick(currentchannel, user, "Kick request by " + event.getUser().getNick());
+		    //OresomeBot.bot.ban(currentchannel, hostmask);
+		    //OresomeBot.bot.kick(currentchannel, user, "Kick request by " + event.getUser().getNick());
+		    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " +b " + hostmask);
+		    OresomeBot.bot.sendRawLineNow("kick" + " " + event.getChannel().getName() + " " + userarg 
+			    + " " + "Kick_request_by_" + event.getUser().getNick());
 
 		}
 
