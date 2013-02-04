@@ -15,7 +15,7 @@ public class Config {
     static String server;
     static int port;
     static String password;
-    static String ghost;
+    static int messagedelay;
     static String[] channels;
     public static String[] admins;
     static String mysql_host;
@@ -34,7 +34,7 @@ public class Config {
 	port = Integer.parseInt(config.getProperty("port"));
 	password = config.getProperty("password");
 	channels = config.getProperty("channels").split(",");
-	ghost = config.getProperty("ghost");
+	messagedelay = Integer.parseInt(config.getProperty("messagedelay"));
 	admins = config.getProperty("admins").split(",");
 
 	mysql_host = config.getProperty("mysql_host");

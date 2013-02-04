@@ -46,6 +46,7 @@ public class OresomeBot {
 	bot.identify(Config.password);
 	bot.setVerbose(true);
 	bot.connect(Config.server, Config.port);
+	bot.setMessageDelay(Config.messagedelay);
 
 	// Setup MySQL DB.
 	setupDatabase();
