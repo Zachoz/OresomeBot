@@ -15,6 +15,8 @@ public class Config {
     static String server;
     static int port;
     static String password;
+    static String serverpassword;
+    static boolean SSL;
     static int messagedelay;
     static String[] channels;
     public static String[] admins;
@@ -32,7 +34,9 @@ public class Config {
 	user = config.getProperty("user");
 	server = config.getProperty("server");
 	port = Integer.parseInt(config.getProperty("port"));
+	SSL = Boolean.parseBoolean(config.getProperty("SSL"));
 	password = config.getProperty("password");
+	serverpassword = config.getProperty("serverpassword");
 	channels = config.getProperty("channels").split(",");
 	messagedelay = Integer.parseInt(config.getProperty("messagedelay"));
 	admins = config.getProperty("admins").split(",");

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 //PircBotX imports.
 import org.pircbotx.PircBotX;
+import org.pircbotx.UtilSSLSocketFactory;
 
 //OresomeBot imports.
 import com.zachoz.OresomeBot.Database.*;
@@ -38,15 +39,46 @@ public class OresomeBot {
 
 	}
 
-	// Connection.
+	// Connection:
+	
+	// Auto change nick if already taken.
 	bot.setAutoNickChange(true);
+	
+	// Set bot version ("realname")
 	bot.setVersion("OresomeBot IRC Bot, by Zachoz.");
+	
+	// Set login username.
 	bot.setLogin(Config.user);
+	
+	// Set initial nickname
 	bot.setName(Config.nick);
+	
+	// Identify with NickServ
 	bot.identify(Config.password);
+	
+	// Output a TON if info to console. 
 	bot.setVerbose(true);
-	bot.connect(Config.server, Config.port);
+	
+	// Connect to the IRC server
+	if(Config.SSL && !Config.serverpassword.isEmpty()) {
+	bot.connect(Config.server, Config.port, Config.serverpassword, new UtilSSLSocketFactory().trustAllCertificates());
+	} else if (Config.SSL && Config.serverpassword.isEmpty()) {
+	    bot.connect(Config.server, Config.port, new UtilSSLSocketFactory().trustAllCertificates()); 
+	} else {
+	    bot.connect(Config.server, Config.port);
+	}
+	
+	// Set bot message delay
 	bot.setMessageDelay(Config.messagedelay);
+	
+	// Auto reconnect to IRC server if disconnected
+	bot.setAutoReconnect(true);
+	
+	// Auto rejoin channels if disconnected
+	bot.setAutoReconnectChannels(true);
+	
+	// Join channels specified in config.
+	joinChannels();
 
 	// Setup MySQL DB.
 	setupDatabase();
@@ -54,13 +86,14 @@ public class OresomeBot {
 	// Load listeners
 	loadListeners();
 
+	endCommand();
+    }
+    
+    public static void joinChannels() {
 	// Join specified channels
 	for (int i = 0; i < Config.channels.length; i++) {
 	    bot.joinChannel(Config.channels[i]);
 	}
-
-	
-	endCommand();
     }
     
     public static void loadListeners() throws Exception {
