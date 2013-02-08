@@ -20,6 +20,7 @@ public class Config {
     static int messagedelay;
     static String[] channels;
     public static String[] admins;
+    static String primarychannel;
     static String mysql_host;
     static String mysql_db;
     static String mysql_user;
@@ -37,6 +38,7 @@ public class Config {
 	SSL = Boolean.parseBoolean(config.getProperty("SSL"));
 	password = config.getProperty("password");
 	serverpassword = config.getProperty("serverpassword");
+	primarychannel = config.getProperty("primarychannel");
 	channels = config.getProperty("channels").split(",");
 	messagedelay = Integer.parseInt(config.getProperty("messagedelay"));
 	admins = config.getProperty("admins").split(",");

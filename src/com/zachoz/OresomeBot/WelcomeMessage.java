@@ -15,7 +15,7 @@ public class WelcomeMessage extends ListenerAdapter {
 
 	ResultSet rs = OresomeBot.mysql.query("SELECT * FROM oresomejoinedusers WHERE users='" + speaker + "'");
 
-	if (currentchannel.equals("#oresomecraft")) {
+	if (currentchannel.equals(Config.primarychannel)) {
 
 	    if (rs.next()) {
 		// Just ignore them.
