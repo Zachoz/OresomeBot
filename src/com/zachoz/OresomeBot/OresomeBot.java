@@ -27,7 +27,7 @@ public class OresomeBot {
     public static MySQL mysql;
 
     public static void main(String[] args) throws Exception,
-	    FileNotFoundException, IOException {
+    FileNotFoundException, IOException {
 
 	// Load properties file.
 	try {
@@ -40,92 +40,92 @@ public class OresomeBot {
 	}
 
 	// Connection:
-	
+
 	// Auto change nick if already taken.
 	bot.setAutoNickChange(true);
-	
+
 	// Set bot version ("realname")
 	bot.setVersion("OresomeBot IRC Bot, by Zachoz.");
-	
+
 	// Set login username.
 	bot.setLogin(Config.user);
-	
+
 	// Set initial nickname
 	bot.setName(Config.nick);
-	
+
 	// Identify with NickServ
 	bot.identify(Config.password);
-	
+
 	// Output a TON if info to console. 
 	bot.setVerbose(true);
-	
+
 	// Connect to the IRC server
 	if(Config.SSL && !Config.serverpassword.isEmpty()) {
-	bot.connect(Config.server, Config.port, Config.serverpassword, new UtilSSLSocketFactory().trustAllCertificates());
+	    bot.connect(Config.server, Config.port, Config.serverpassword, new UtilSSLSocketFactory().trustAllCertificates());
 	} else if (Config.SSL && Config.serverpassword.isEmpty()) {
 	    bot.connect(Config.server, Config.port, new UtilSSLSocketFactory().trustAllCertificates()); 
 	} else {
 	    bot.connect(Config.server, Config.port);
 	}
-	
+
 	// Set bot message delay
 	bot.setMessageDelay(Config.messagedelay);
-	
+
 	// Auto reconnect to IRC server if disconnected
 	bot.setAutoReconnect(true);
-	
+
 	// Auto rejoin channels if disconnected
 	bot.setAutoReconnectChannels(true);
-	
+
 	// Join channels specified in config.
 	joinChannels();
 
 	// Setup MySQL DB.
 	setupDatabase();
-	
+
 	// Load listeners
 	loadListeners();
 
 	endCommand();
     }
-    
+
     public static void joinChannels() {
 	// Join specified channels
 	for (int i = 0; i < Config.channels.length; i++) {
 	    bot.joinChannel(Config.channels[i]);
 	}
     }
-    
+
     public static void loadListeners() throws Exception {
-	
+
 	// Load all commands & other listeners.
-		bot.getListenerManager().addListener(new ReloadCommand());
-		bot.getListenerManager().addListener(new CleverBot());
-		bot.getListenerManager().addListener(new JoinCommand());
-		bot.getListenerManager().addListener(new RelayTellMessages());
-		bot.getListenerManager().addListener(new WelcomeMessage());
-		bot.getListenerManager().addListener(new PartCommand());
-		bot.getListenerManager().addListener(new BanCommand());
-		bot.getListenerManager().addListener(new UnbanCommand());
-		bot.getListenerManager().addListener(new KickCommand());
-		bot.getListenerManager().addListener(new KickbanCommand());
-		bot.getListenerManager().addListener(new MuteCommand());
-		bot.getListenerManager().addListener(new HelpCommand());
-		bot.getListenerManager().addListener(new InfoCommand());
-		bot.getListenerManager().addListener(new SayCommand());
-		bot.getListenerManager().addListener(new NickCommand());
-		bot.getListenerManager().addListener(new TellCommand());
-		bot.getListenerManager().addListener(new AutoopCommand());
-		bot.getListenerManager().addListener(new DeautoopCommand());
-		bot.getListenerManager().addListener(new AutovoiceCommand());
-		bot.getListenerManager().addListener(new DeautovoiceCommand());
-		bot.getListenerManager().addListener(new OpmeCommand());
-		bot.getListenerManager().addListener(new DeopmeCommand());
-		bot.getListenerManager().addListener(new CleverbotToggleCommand());
-		bot.getListenerManager().addListener(new SeenManager());
-		bot.getListenerManager().addListener(new SeenCommand());
-		bot.getListenerManager().addListener(new GoogleCommand());
-		bot.getListenerManager().addListener(new SendRawLineCommand());
+	bot.getListenerManager().addListener(new ReloadCommand());
+	bot.getListenerManager().addListener(new CleverBot());
+	bot.getListenerManager().addListener(new JoinCommand());
+	bot.getListenerManager().addListener(new RelayTellMessages());
+	bot.getListenerManager().addListener(new WelcomeMessage());
+	bot.getListenerManager().addListener(new PartCommand());
+	bot.getListenerManager().addListener(new BanCommand());
+	bot.getListenerManager().addListener(new UnbanCommand());
+	bot.getListenerManager().addListener(new KickCommand());
+	bot.getListenerManager().addListener(new KickbanCommand());
+	bot.getListenerManager().addListener(new MuteCommand());
+	bot.getListenerManager().addListener(new HelpCommand());
+	bot.getListenerManager().addListener(new InfoCommand());
+	bot.getListenerManager().addListener(new SayCommand());
+	bot.getListenerManager().addListener(new NickCommand());
+	bot.getListenerManager().addListener(new TellCommand());
+	bot.getListenerManager().addListener(new AutoopCommand());
+	bot.getListenerManager().addListener(new DeautoopCommand());
+	bot.getListenerManager().addListener(new AutovoiceCommand());
+	bot.getListenerManager().addListener(new DeautovoiceCommand());
+	bot.getListenerManager().addListener(new OpmeCommand());
+	bot.getListenerManager().addListener(new DeopmeCommand());
+	bot.getListenerManager().addListener(new CleverbotToggleCommand());
+	bot.getListenerManager().addListener(new SeenManager());
+	bot.getListenerManager().addListener(new SeenCommand());
+	bot.getListenerManager().addListener(new GoogleCommand());
+	bot.getListenerManager().addListener(new SendRawLineCommand());
 
     }
 
@@ -162,7 +162,7 @@ public class OresomeBot {
 	}
 	mysql.close();
     }
-    
+
     public static void endCommand() {
 	Scanner reader = new Scanner(System.in);
 	String command = reader.nextLine();

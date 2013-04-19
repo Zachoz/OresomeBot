@@ -29,7 +29,7 @@ public class Config {
     public static MySQL mysql;
 
     public static void loadConfiguration() throws FileNotFoundException,
-	    IOException {
+    IOException {
 	config.load(new FileInputStream("OresomeBot.properties"));
 	nick = config.getProperty("nick");
 	user = config.getProperty("user");
