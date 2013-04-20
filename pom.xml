@@ -42,7 +42,7 @@
   <repositories>
     <repository>
       <id>OresomeCraft</id>
-      <url>http://oresomecraft.com/Assets/maven</url>
+      <url>http://repo.oresomecraft.com</url>
     </repository>
   </repositories>
   <build>
@@ -82,6 +82,7 @@
                   <include>org.pircbotx:pircbotx</include>
                   <include>mysql:mysql-connector-java</include>
                   <include>com.google.code:chatter-bot-api</include>
+                  <include>com.google.code.gson:gson</include>
                 </includes>
               </artifactSet>
             </configuration>
