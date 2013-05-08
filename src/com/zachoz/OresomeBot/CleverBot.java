@@ -34,7 +34,8 @@ public class CleverBot extends ListenerAdapter {
 
 	}
 
-	if (event.getMessage().startsWith(OresomeBot.bot.getNick() + ": ")) {
+	if (event.getMessage().startsWith(OresomeBot.bot.getNick() + ": ") ||
+		event.getMessage().startsWith(OresomeBot.bot.getNick() + ", ")) {
 	    if (cleverbotEnabled == true) {
 
 		String s = botsession.think(outsay);
