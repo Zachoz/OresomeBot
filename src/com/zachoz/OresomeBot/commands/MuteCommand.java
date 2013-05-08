@@ -27,6 +27,7 @@ public class MuteCommand extends ListenerAdapter {
 		}
 
 	    }
+	    
 	    if (event.getMessage().startsWith(".unmute ") && event.getMessage().contains(userarg)) {
 
 		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {

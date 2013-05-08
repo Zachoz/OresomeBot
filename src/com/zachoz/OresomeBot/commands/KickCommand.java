@@ -12,7 +12,7 @@ public class KickCommand extends ListenerAdapter {
 	if (event.getMessage().split(" ").length > 1) {
 	    Channel currentchannel = event.getChannel();
 	    String userarg = event.getMessage().split(" ")[1];
-	   // User user = OresomeBot.bot.getUser(userarg);
+	    // User user = OresomeBot.bot.getUser(userarg);
 
 	    if (event.getMessage().startsWith(".kick ") && event.getMessage().contains(userarg)) {
 

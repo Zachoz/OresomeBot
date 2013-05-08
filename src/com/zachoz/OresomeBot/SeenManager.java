@@ -5,6 +5,8 @@ import org.pircbotx.hooks.events.JoinEvent;
 import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.PartEvent;
 
+import com.zachoz.OresomeBot.Database.MySQL;
+
 import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,50 +15,68 @@ import java.text.SimpleDateFormat;
 
 @SuppressWarnings("rawtypes")
 public class SeenManager extends ListenerAdapter {
-    
+
     public void onJoin(JoinEvent event) throws SQLException {
+
+	MySQL mysql = new MySQL(OresomeBot.logger,
+		"[OresomeBot]", OresomeBot.mysql_host,
+		OresomeBot.mysql_port, OresomeBot.mysql_db,
+		OresomeBot.mysql_user, OresomeBot.mysql_password);
+
 	String user = event.getUser().getNick();
 	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	Date date = new Date();
 	String lastseen = dateFormat.format(date);
-	OresomeBot.mysql.open();
-	
-	ResultSet rs = OresomeBot.mysql.query("SELECT * FROM seenusers WHERE user='" + user + "'");
-	
+	mysql.open();
+
+	ResultSet rs = mysql.query("SELECT * FROM seenusers WHERE user='" + user + "'");
+
 	if(rs.next()) {
-	    OresomeBot.mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
+	    mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
 	} else {
-	    
-	   OresomeBot.mysql.query("INSERT INTO seenusers (user, lastseen) VALUES ('" + user + "', '" + lastseen + "') "); 
-	   
+
+	    mysql.query("INSERT INTO seenusers (user, lastseen) VALUES ('" + user + "', '" + lastseen + "') "); 
+
 	}
-	OresomeBot.mysql.close();
+	mysql.close();
     }
-    
+
     public void onPart(PartEvent event) {
+
+	MySQL mysql = new MySQL(OresomeBot.logger,
+		"[OresomeBot]", OresomeBot.mysql_host,
+		OresomeBot.mysql_port, OresomeBot.mysql_db,
+		OresomeBot.mysql_user, OresomeBot.mysql_password);
+
 	String user = event.getUser().getNick();
 	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	Date date = new Date();
 	String lastseen = dateFormat.format(date);
-	
-	OresomeBot.mysql.open();
-	OresomeBot.mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
-	OresomeBot.mysql.close();
-	
+
+	mysql.open();
+	mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
+	mysql.close();
+
     }
-    
+
     public void onMessage(MessageEvent event) {
-	OresomeBot.mysql.open();
+
+	MySQL mysql = new MySQL(OresomeBot.logger,
+		"[OresomeBot]", OresomeBot.mysql_host,
+		OresomeBot.mysql_port, OresomeBot.mysql_db,
+		OresomeBot.mysql_user, OresomeBot.mysql_password);
+
+	mysql.open();
 	String user = event.getUser().getNick();
 	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	Date date = new Date();
 	String lastseen = dateFormat.format(date);
 	try {
-	OresomeBot.mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
+	    mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
 	} catch (Exception e){
-	    
+
 	}
-	
+
     }
 
 }

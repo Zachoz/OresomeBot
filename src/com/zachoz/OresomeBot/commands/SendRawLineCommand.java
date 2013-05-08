@@ -18,7 +18,7 @@ public class SendRawLineCommand extends ListenerAdapter {
 
 	    if (event.getMessage().startsWith(".sendrawline ")
 		    && event.getMessage().contains(line)) {
-		
+
 		for (int i = 1; i < ArrSay.length; i++) {
 		    if (ArrSay[i].contains("'")) {
 			String temp = "";
