@@ -11,19 +11,19 @@ public class DeopmeCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 
-	if (event.getMessage().equals(".deopme")) {
-	    String currentchannel = event.getChannel().getName();
+        if (event.getMessage().equals(".deopme")) {
+            String currentchannel = event.getChannel().getName();
 
-	    String admin = "";
-	    for (int i = 0; i < Config.admins.length; i++) {
-		admin += Config.admins[i];
-	    }
+            String admin = "";
+            for (int i = 0; i < Config.admins.length; i++) {
+                admin += Config.admins[i];
+            }
 
-	    if (admin.contains(event.getUser().getNick())) {
-		OresomeBot.bot.sendRawLineNow("mode " + currentchannel + " -o" + " " + event.getUser().getNick());
+            if (admin.contains(event.getUser().getNick())) {
+                OresomeBot.bot.sendRawLineNow("mode " + currentchannel + " -o" + " " + event.getUser().getNick());
 
-	    }
-	}
+            }
+        }
     }
 
 }

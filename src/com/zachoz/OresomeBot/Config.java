@@ -29,25 +29,25 @@ public class Config {
     public static MySQL mysql;
 
     public static void loadConfiguration() throws FileNotFoundException,
-    IOException {
-	config.load(new FileInputStream("OresomeBot.properties"));
-	nick = config.getProperty("nick");
-	user = config.getProperty("user");
-	server = config.getProperty("server");
-	port = Integer.parseInt(config.getProperty("port"));
-	SSL = Boolean.parseBoolean(config.getProperty("SSL"));
-	password = config.getProperty("password");
-	serverpassword = config.getProperty("serverpassword");
-	primarychannel = config.getProperty("primarychannel");
-	channels = config.getProperty("channels").split(",");
-	messagedelay = Integer.parseInt(config.getProperty("messagedelay"));
-	admins = config.getProperty("admins").split(",");
+            IOException {
+        config.load(new FileInputStream("OresomeBot.properties"));
+        nick = config.getProperty("nick");
+        user = config.getProperty("user");
+        server = config.getProperty("server");
+        port = Integer.parseInt(config.getProperty("port"));
+        SSL = Boolean.parseBoolean(config.getProperty("SSL"));
+        password = config.getProperty("password");
+        serverpassword = config.getProperty("serverpassword");
+        primarychannel = config.getProperty("primarychannel");
+        channels = config.getProperty("channels").split(",");
+        messagedelay = Integer.parseInt(config.getProperty("messagedelay"));
+        admins = config.getProperty("admins").split(",");
 
-	mysql_host = config.getProperty("mysql_host");
-	mysql_db = config.getProperty("mysql_db");
-	mysql_user = config.getProperty("mysql_user");
-	mysql_password = config.getProperty("mysql_password");
-	mysql_port = config.getProperty("mysql_port");
+        mysql_host = config.getProperty("mysql_host");
+        mysql_db = config.getProperty("mysql_db");
+        mysql_user = config.getProperty("mysql_user");
+        mysql_password = config.getProperty("mysql_password");
+        mysql_port = config.getProperty("mysql_port");
 
     }
 

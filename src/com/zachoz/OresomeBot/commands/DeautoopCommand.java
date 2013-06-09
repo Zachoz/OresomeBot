@@ -10,26 +10,26 @@ import com.zachoz.OresomeBot.OresomeBot;
 public class DeautoopCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
-	if (event.getMessage().split(" ").length > 1) {
+        if (event.getMessage().split(" ").length > 1) {
 
-	    String user = event.getMessage().split(" ")[1];
-	    String currentchannel = event.getChannel().getName();
-	    if (event.getMessage().startsWith(".deautoop ") && event.getMessage().contains(user)) {
+            String user = event.getMessage().split(" ")[1];
+            String currentchannel = event.getChannel().getName();
+            if (event.getMessage().startsWith(".deautoop ") && event.getMessage().contains(user)) {
 
-		String admin = "";
-		for (int i = 0; i < Config.admins.length; i++) {
-		    admin += Config.admins[i];
-		}
+                String admin = "";
+                for (int i = 0; i < Config.admins.length; i++) {
+                    admin += Config.admins[i];
+                }
 
-		if (admin.contains(event.getUser().getNick())) {
-		    OresomeBot.bot.sendMessage("ChanServ", "flags " + currentchannel + " " + user + " -O ");
+                if (admin.contains(event.getUser().getNick())) {
+                    OresomeBot.bot.sendMessage("ChanServ", "flags " + currentchannel + " " + user + " -O ");
 
-		    event.respond("Attempted set ChanServ flag -O on " + user);
+                    event.respond("Attempted set ChanServ flag -O on " + user);
 
-		}
+                }
 
-	    }
+            }
 
-	}
+        }
     }
 }

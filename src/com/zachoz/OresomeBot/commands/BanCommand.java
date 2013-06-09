@@ -10,25 +10,25 @@ import com.zachoz.OresomeBot.OresomeBot;
 public class BanCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
-	if (event.getMessage().split(" ").length > 1) {
-	    Channel currentchannel = event.getChannel();
+        if (event.getMessage().split(" ").length > 1) {
+            Channel currentchannel = event.getChannel();
 
-	    String userarg = event.getMessage().split(" ")[1];
-	    User user = OresomeBot.bot.getUser(userarg);
-	    String hostmask = user.getHostmask();
+            String userarg = event.getMessage().split(" ")[1];
+            User user = OresomeBot.bot.getUser(userarg);
+            String hostmask = user.getHostmask();
 
-	    if (event.getMessage().startsWith(".ban ") && event.getMessage().contains(userarg)) {
+            if (event.getMessage().startsWith(".ban ") && event.getMessage().contains(userarg)) {
 
-		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
+                if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-		    //OresomeBot.bot.ban(currentchannel, hostmask);
-		    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " +b " + hostmask);
+                    //OresomeBot.bot.ban(currentchannel, hostmask);
+                    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " +b " + hostmask);
 
-		}
+                }
 
-	    }
+            }
 
-	}
+        }
 
     }
 }

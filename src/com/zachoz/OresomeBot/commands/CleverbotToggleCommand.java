@@ -11,39 +11,39 @@ public class CleverbotToggleCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 
-	if (event.getMessage().equals(".cleverboton")) {
+        if (event.getMessage().equals(".cleverboton")) {
 
-	    String admin = "";
-	    for (int i = 0; i < Config.admins.length; i++) {
-		admin += Config.admins[i];
-	    }
+            String admin = "";
+            for (int i = 0; i < Config.admins.length; i++) {
+                admin += Config.admins[i];
+            }
 
-	    if (admin.contains(event.getUser().getNick())) {
+            if (admin.contains(event.getUser().getNick())) {
 
-		CleverBot.cleverbotEnabled = true;
+                CleverBot.cleverbotEnabled = true;
 
-		event.respond("CleverBot enabled.");
+                event.respond("CleverBot enabled.");
 
-	    }
+            }
 
-	}
+        }
 
-	if (event.getMessage().equals(".cleverbotoff")) {
+        if (event.getMessage().equals(".cleverbotoff")) {
 
-	    String admin = "";
-	    for (int i = 0; i < Config.admins.length; i++) {
-		admin += Config.admins[i];
-	    }
+            String admin = "";
+            for (int i = 0; i < Config.admins.length; i++) {
+                admin += Config.admins[i];
+            }
 
-	    if (admin.contains(event.getUser().getNick())) {
+            if (admin.contains(event.getUser().getNick())) {
 
-		CleverBot.cleverbotEnabled = false;
+                CleverBot.cleverbotEnabled = false;
 
-		event.respond("CleverBot disabled.");
+                event.respond("CleverBot disabled.");
 
-	    }
+            }
 
-	}
+        }
 
     }
 }

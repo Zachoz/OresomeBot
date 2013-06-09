@@ -14,10 +14,15 @@ tmp/
 local.properties
 .classpath
 .settings/
-.loadpath
+.
 /target
 /dependency-reduced-pom.xml
-*.class
+
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea/
 
 # External tool builders
 .externalToolBuilders/

@@ -12,27 +12,27 @@ public class ReloadCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
 
-	if (event.getMessage().equals(".reload ")) {
+        if (event.getMessage().equals(".reload ")) {
 
-	    String admin = "";
-	    for (int i = 0; i < Config.admins.length; i++) {
-		admin += Config.admins[i];
-	    }
+            String admin = "";
+            for (int i = 0; i < Config.admins.length; i++) {
+                admin += Config.admins[i];
+            }
 
-	    if (admin.contains(event.getUser().getNick())) {
-		try {
+            if (admin.contains(event.getUser().getNick())) {
+                try {
 
-		    Config.loadConfiguration();
+                    Config.loadConfiguration();
 
-		} catch (FileNotFoundException ex) {
-		    // This needs to generate the file if it doesn't exist.
-		}
+                } catch (FileNotFoundException ex) {
+                    // This needs to generate the file if it doesn't exist.
+                }
 
-		event.respond("Reloading configuration.");
+                event.respond("Reloading configuration.");
 
-	    }
+            }
 
-	}
+        }
 
     }
 }

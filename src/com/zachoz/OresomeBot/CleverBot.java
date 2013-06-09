@@ -19,30 +19,30 @@ public class CleverBot extends ListenerAdapter {
     public static boolean cleverbotEnabled = true;
 
     public CleverBot() throws Exception {
-	factory = new ChatterBotFactory();
-	cleverbot = factory.create(ChatterBotType.CLEVERBOT);
-	botsession = cleverbot.createSession();
+        factory = new ChatterBotFactory();
+        cleverbot = factory.create(ChatterBotType.CLEVERBOT);
+        botsession = cleverbot.createSession();
     }
 
     public void onMessage(MessageEvent event) throws Exception {
-	String message = event.getMessage();
-	String[] ArrSay = message.split(" ");
-	String outsay = "";
+        String message = event.getMessage();
+        String[] ArrSay = message.split(" ");
+        String outsay = "";
 
-	for (int i = 1; i < ArrSay.length; i++) {
-	    outsay += ArrSay[i];
+        for (int i = 1; i < ArrSay.length; i++) {
+            outsay += ArrSay[i];
 
-	}
+        }
 
-	if (event.getMessage().startsWith(OresomeBot.bot.getNick() + ": ") ||
-		event.getMessage().startsWith(OresomeBot.bot.getNick() + ", ")) {
-	    if (cleverbotEnabled == true) {
+        if (event.getMessage().startsWith(OresomeBot.bot.getNick() + ": ") ||
+                event.getMessage().startsWith(OresomeBot.bot.getNick() + ", ")) {
+            if (cleverbotEnabled) {
 
-		String s = botsession.think(outsay);
-		event.respond(s);
+                String s = botsession.think(outsay);
+                event.respond(s);
 
-	    }
-	}
+            }
+        }
 
     }
 }

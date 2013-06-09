@@ -9,20 +9,20 @@ import com.zachoz.OresomeBot.OresomeBot;
 public class UnbanCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
-	if (event.getMessage().split(" ").length > 1) {
-	    Channel currentchannel = event.getChannel();
+        if (event.getMessage().split(" ").length > 1) {
+            Channel currentchannel = event.getChannel();
 
-	    String userarg = event.getMessage().split(" ")[1];
+            String userarg = event.getMessage().split(" ")[1];
 
-	    if (event.getMessage().startsWith(".unban ") && event.getMessage().contains(userarg)) {
+            if (event.getMessage().startsWith(".unban ") && event.getMessage().contains(userarg)) {
 
-		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
+                if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-		    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " -b " + userarg);
-		}
+                    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " -b " + userarg);
+                }
 
-	    }
-	}
+            }
+        }
     }
 
 }

@@ -18,64 +18,64 @@ public class SeenManager extends ListenerAdapter {
 
     public void onJoin(JoinEvent event) throws SQLException {
 
-	MySQL mysql = new MySQL(OresomeBot.logger,
-		"[OresomeBot]", OresomeBot.mysql_host,
-		OresomeBot.mysql_port, OresomeBot.mysql_db,
-		OresomeBot.mysql_user, OresomeBot.mysql_password);
+        MySQL mysql = new MySQL(OresomeBot.logger,
+                "[OresomeBot]", OresomeBot.mysql_host,
+                OresomeBot.mysql_port, OresomeBot.mysql_db,
+                OresomeBot.mysql_user, OresomeBot.mysql_password);
 
-	String user = event.getUser().getNick();
-	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	Date date = new Date();
-	String lastseen = dateFormat.format(date);
-	mysql.open();
+        String user = event.getUser().getNick();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String lastseen = dateFormat.format(date);
+        mysql.open();
 
-	ResultSet rs = mysql.query("SELECT * FROM seenusers WHERE user='" + user + "'");
+        ResultSet rs = mysql.query("SELECT * FROM seenusers WHERE user='" + user + "'");
 
-	if(rs.next()) {
-	    mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
-	} else {
+        if (rs.next()) {
+            mysql.query("UPDATE seenusers SET lastseen = '" + lastseen + "' WHERE user='" + user + "'");
+        } else {
 
-	    mysql.query("INSERT INTO seenusers (user, lastseen) VALUES ('" + user + "', '" + lastseen + "') "); 
+            mysql.query("INSERT INTO seenusers (user, lastseen) VALUES ('" + user + "', '" + lastseen + "') ");
 
-	}
-	mysql.close();
+        }
+        mysql.close();
     }
 
     public void onPart(PartEvent event) {
 
-	MySQL mysql = new MySQL(OresomeBot.logger,
-		"[OresomeBot]", OresomeBot.mysql_host,
-		OresomeBot.mysql_port, OresomeBot.mysql_db,
-		OresomeBot.mysql_user, OresomeBot.mysql_password);
+        MySQL mysql = new MySQL(OresomeBot.logger,
+                "[OresomeBot]", OresomeBot.mysql_host,
+                OresomeBot.mysql_port, OresomeBot.mysql_db,
+                OresomeBot.mysql_user, OresomeBot.mysql_password);
 
-	String user = event.getUser().getNick();
-	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	Date date = new Date();
-	String lastseen = dateFormat.format(date);
+        String user = event.getUser().getNick();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String lastseen = dateFormat.format(date);
 
-	mysql.open();
-	mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
-	mysql.close();
+        mysql.open();
+        mysql.query("UPDATE seenusers SET lastseen = '" + lastseen + "' WHERE user='" + user + "'");
+        mysql.close();
 
     }
 
     public void onMessage(MessageEvent event) {
 
-	MySQL mysql = new MySQL(OresomeBot.logger,
-		"[OresomeBot]", OresomeBot.mysql_host,
-		OresomeBot.mysql_port, OresomeBot.mysql_db,
-		OresomeBot.mysql_user, OresomeBot.mysql_password);
+        MySQL mysql = new MySQL(OresomeBot.logger,
+                "[OresomeBot]", OresomeBot.mysql_host,
+                OresomeBot.mysql_port, OresomeBot.mysql_db,
+                OresomeBot.mysql_user, OresomeBot.mysql_password);
 
-	mysql.open();
-	String user = event.getUser().getNick();
-	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	Date date = new Date();
-	String lastseen = dateFormat.format(date);
-	try {
-	    mysql.query("UPDATE seenusers SET lastseen = '"+lastseen+"' WHERE user='"+ user +"'");
-	} catch (Exception e){
+        mysql.open();
+        String user = event.getUser().getNick();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String lastseen = dateFormat.format(date);
+        try {
+            mysql.query("UPDATE seenusers SET lastseen = '" + lastseen + "' WHERE user='" + user + "'");
+        } catch (Exception e) {
 
-	}
+        }
 
     }
 

@@ -10,34 +10,34 @@ import com.zachoz.OresomeBot.OresomeBot;
 public class MuteCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
-	if (event.getMessage().split(" ").length > 1) {
-	    Channel currentchannel = event.getChannel();
+        if (event.getMessage().split(" ").length > 1) {
+            Channel currentchannel = event.getChannel();
 
-	    String userarg = event.getMessage().split(" ")[1];
-	    User user = OresomeBot.bot.getUser(userarg);
-	    String hostmask = user.getHostmask();
+            String userarg = event.getMessage().split(" ")[1];
+            User user = OresomeBot.bot.getUser(userarg);
+            String hostmask = user.getHostmask();
 
-	    if (event.getMessage().startsWith(".mute ") && event.getMessage().contains(userarg)) {
+            if (event.getMessage().startsWith(".mute ") && event.getMessage().contains(userarg)) {
 
-		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
+                if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-		    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " +q " + hostmask);
+                    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " +q " + hostmask);
 
 
-		}
+                }
 
-	    }
-	    
-	    if (event.getMessage().startsWith(".unmute ") && event.getMessage().contains(userarg)) {
+            }
 
-		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
+            if (event.getMessage().startsWith(".unmute ") && event.getMessage().contains(userarg)) {
 
-		    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " -q " + hostmask);
+                if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-		}
+                    OresomeBot.bot.sendRawLineNow("mode" + " " + event.getChannel().getName() + " -q " + hostmask);
 
-	    }
-	}
+                }
+
+            }
+        }
 
     }
 

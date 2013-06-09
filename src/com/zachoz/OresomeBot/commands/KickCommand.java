@@ -9,22 +9,22 @@ import com.zachoz.OresomeBot.OresomeBot;
 public class KickCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) throws Exception {
-	if (event.getMessage().split(" ").length > 1) {
-	    Channel currentchannel = event.getChannel();
-	    String userarg = event.getMessage().split(" ")[1];
-	    // User user = OresomeBot.bot.getUser(userarg);
+        if (event.getMessage().split(" ").length > 1) {
+            Channel currentchannel = event.getChannel();
+            String userarg = event.getMessage().split(" ")[1];
+            // User user = OresomeBot.bot.getUser(userarg);
 
-	    if (event.getMessage().startsWith(".kick ") && event.getMessage().contains(userarg)) {
+            if (event.getMessage().startsWith(".kick ") && event.getMessage().contains(userarg)) {
 
-		if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
+                if (currentchannel.hasVoice(event.getUser()) || currentchannel.isOp(event.getUser())) {
 
-		    //OresomeBot.bot.kick(currentchannel, user, "Kick request by " + event.getUser().getNick());
-		    OresomeBot.bot.sendRawLineNow("kick" + " " + event.getChannel().getName() + " " + userarg 
-			    + " " + "Kick_request_by_" + event.getUser().getNick());
+                    //OresomeBot.bot.kick(currentchannel, user, "Kick request by " + event.getUser().getNick());
+                    OresomeBot.bot.sendRawLineNow("kick" + " " + event.getChannel().getName() + " " + userarg
+                            + " " + "Kick_request_by_" + event.getUser().getNick());
 
-		}
-	    }
-	}
+                }
+            }
+        }
 
     }
 
