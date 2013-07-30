@@ -1,6 +1,6 @@
 package com.zachoz.OresomeBot.Database;
 /**
- * Database Handler
+ * database Handler
  * Abstract superclass for all subclass database files.
  *
  * Date Created: 2011-08-26 19:08

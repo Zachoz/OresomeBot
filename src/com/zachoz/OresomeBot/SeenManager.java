@@ -39,6 +39,10 @@ public class SeenManager extends ListenerAdapter {
 
         }
         mysql.close();
+
+        if (event.getUser().getNick().equalsIgnoreCase("azdaspaz818")) {
+            event.respond("You suck");
+        }
     }
 
     public void onPart(PartEvent event) {

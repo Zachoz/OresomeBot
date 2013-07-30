@@ -42,7 +42,7 @@
     <repositories>
         <repository>
             <id>OresomeCraft</id>
-            <url>http://repo.oresomecraft.com</url>
+            <url>http://assets.oresomecraft.com/maven</url>
         </repository>
     </repositories>
     <build>

@@ -1,17 +1,13 @@
 package com.zachoz.OresomeBot;
 
-//Java imports.
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-//PircBotX imports.
 import org.pircbotx.PircBotX;
 import org.pircbotx.UtilSSLSocketFactory;
+import org.pircbotx.exception.IrcException;
 
-//OresomeBot imports.
 import com.zachoz.OresomeBot.Database.*;
 import com.zachoz.OresomeBot.commands.*;
 
@@ -27,62 +23,68 @@ public class OresomeBot {
     public static String mysql_port;
     public static MySQL mysql;
 
-    public static void main(String[] args) throws Exception,
-            FileNotFoundException, IOException {
+    public static void main(String[] args) {
 
         // Load properties file.
         try {
 
             Config.loadConfiguration();
 
-        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
             // This needs to generate the file if it doesn't exist.
 
         }
 
-        // Connection:
+        try {
+            // Connection:
 
-        // Auto change nick if already taken.
-        bot.setAutoNickChange(true);
+            // Auto change nick if already taken.
+            bot.setAutoNickChange(true);
 
-        // Set bot version ("realname")
-        bot.setVersion("OresomeBot IRC Bot, by Zachoz.");
+            // Set bot version ("realname")
+            bot.setVersion("OresomeBot IRC Bot, by Zachoz.");
 
-        // Set login username.
-        bot.setLogin(Config.user);
+            // Set login username.
+            bot.setLogin(Config.user);
 
-        // Set initial nickname
-        bot.setName(Config.nick);
+            // Set initial nickname
+            bot.setName(Config.nick);
 
-        // Identify with NickServ
-        bot.identify(Config.password);
+            // Identify with NickServ
+            bot.identify(Config.password);
 
-        // Output a TON if info to console.
-        bot.setVerbose(true);
+            // Output a TON if info to console.
+            bot.setVerbose(true);
 
-        // Connect to the IRC server
-        if (Config.SSL && !Config.serverpassword.isEmpty()) {
-            bot.connect(Config.server, Config.port, Config.serverpassword, new UtilSSLSocketFactory().trustAllCertificates());
-        } else if (Config.SSL && Config.serverpassword.isEmpty()) {
-            bot.connect(Config.server, Config.port, new UtilSSLSocketFactory().trustAllCertificates());
-        } else {
-            bot.connect(Config.server, Config.port);
+            // Connect to the IRC server
+            if (Config.SSL && !Config.serverpassword.isEmpty()) {
+                bot.connect(Config.server, Config.port, Config.serverpassword, new UtilSSLSocketFactory().trustAllCertificates());
+            } else if (Config.SSL && Config.serverpassword.isEmpty()) {
+                bot.connect(Config.server, Config.port, new UtilSSLSocketFactory().trustAllCertificates());
+            } else {
+                bot.connect(Config.server, Config.port);
+            }
+
+            // Set bot message delay
+            bot.setMessageDelay(Config.messagedelay);
+
+            // Auto reconnect to IRC server if disconnected
+            bot.setAutoReconnect(true);
+
+            // Auto rejoin channels if disconnected
+            bot.setAutoReconnectChannels(true);
+
+            // Join channels specified in config.
+            joinChannels();
+
+            // Setup MySQL DB.
+            setupDatabase();
+
+        } catch (IrcException e) {
+            // TODO: Fix itself? I dunno...
+        } catch (IOException e) {
+            // TODO: hmm...
         }
-
-        // Set bot message delay
-        bot.setMessageDelay(Config.messagedelay);
-
-        // Auto reconnect to IRC server if disconnected
-        bot.setAutoReconnect(true);
-
-        // Auto rejoin channels if disconnected
-        bot.setAutoReconnectChannels(true);
-
-        // Join channels specified in config.
-        joinChannels();
-
-        // Setup MySQL DB.
-        setupDatabase();
 
         // Load listeners
         loadListeners();
@@ -97,11 +99,10 @@ public class OresomeBot {
         }
     }
 
-    public static void loadListeners() throws Exception {
+    public static void loadListeners() {
 
         // Load all commands & other listeners.
         bot.getListenerManager().addListener(new ReloadCommand());
-        bot.getListenerManager().addListener(new CleverBot());
         bot.getListenerManager().addListener(new JoinCommand());
         bot.getListenerManager().addListener(new RelayTellMessages());
         bot.getListenerManager().addListener(new WelcomeMessage());
@@ -128,6 +129,12 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new GoogleCommand());
         bot.getListenerManager().addListener(new SendRawLineCommand());
 
+        try {
+            bot.getListenerManager().addListener(new CleverBot());
+        } catch (Exception e) {
+            // yay, no channel spam
+        }
+
     }
 
     private static void setupDatabase() {
@@ -140,7 +147,7 @@ public class OresomeBot {
         mysql = new MySQL(logger, "[OresomeBot]", mysql_host, mysql_port,
                 mysql_db, mysql_user, mysql_password);
 
-        System.out.println("Connecting to MySQL Database...");
+        System.out.println("Connecting to MySQL database...");
         mysql.open();
 
         if (mysql.checkConnection()) {
