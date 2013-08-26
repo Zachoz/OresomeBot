@@ -27,32 +27,23 @@ public class OresomeBot {
 
         // Load properties file.
         try {
-
             Config.loadConfiguration();
-
         } catch (IOException ex) {
             // This needs to generate the file if it doesn't exist.
-
         }
 
         try {
             // Connection:
-
             // Auto change nick if already taken.
             bot.setAutoNickChange(true);
-
             // Set bot version ("realname")
             bot.setVersion("OresomeBot IRC Bot, by Zachoz.");
-
             // Set login username.
             bot.setLogin(Config.user);
-
             // Set initial nickname
             bot.setName(Config.nick);
-
             // Identify with NickServ
             bot.identify(Config.password);
-
             // Output a TON if info to console.
             bot.setVerbose(true);
 
@@ -67,16 +58,12 @@ public class OresomeBot {
 
             // Set bot message delay
             bot.setMessageDelay(Config.messagedelay);
-
             // Auto reconnect to IRC server if disconnected
             bot.setAutoReconnect(true);
-
             // Auto rejoin channels if disconnected
             bot.setAutoReconnectChannels(true);
-
             // Join channels specified in config.
             joinChannels();
-
             // Setup MySQL DB.
             setupDatabase();
 
@@ -88,7 +75,6 @@ public class OresomeBot {
 
         // Load listeners
         loadListeners();
-
         endCommand();
     }
 
@@ -113,6 +99,7 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new KickbanCommand());
         bot.getListenerManager().addListener(new MuteCommand());
         bot.getListenerManager().addListener(new HelpCommand());
+        bot.getListenerManager().addListener(new CheckCommand());
         bot.getListenerManager().addListener(new InfoCommand());
         bot.getListenerManager().addListener(new SayCommand());
         bot.getListenerManager().addListener(new NickCommand());
