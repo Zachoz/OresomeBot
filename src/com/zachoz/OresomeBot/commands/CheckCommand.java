@@ -11,15 +11,15 @@ public class CheckCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) {
 
-        String[] line = event.getMessage().split(" ");
+	String[] line = event.getMessage().split(" ");
 
-        if (event.getMessage().contains(".check ")) {
-            try {
-                InetAddress checkme = InetAddress.getByName(line[1]);
-                event.respond("Host name : " + checkme.getCanonicalHostName());
-            } catch (UnknownHostException e) {
-                event.respond("Either you're retarded or this guy has hacks.");
-            }
-        }
+	if (event.getMessage().contains(".check ")) {
+	    try {
+		InetAddress checkme = InetAddress.getByName(line[1]);
+		event.respond("Host name : " + checkme.getCanonicalHostName());
+	    } catch (UnknownHostException e) {
+		event.respond("Either you're retarded or this guy has hacks.");
+	    }
+	}
     }
 }

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
+import code.husky.UtilDB;
+
 public class CheckBanCommand extends ListenerAdapter {
 
     public void onMessage(MessageEvent event) {
@@ -15,31 +17,32 @@ public class CheckBanCommand extends ListenerAdapter {
 	if (event.getMessage().contains("!checkban ")) {
 	    String player = line[1];
 	    String server = line[2];
-	    
-	    switch(server) {
-	    case "battle":
-		event.respond(battleBan(player));
-	    case "smp":
-		event.respond(smpBan(player));
-	    case "onslaught":
+	    if(server.equalsIgnoreCase("battle")) {
+		battleBan(player);
+	    } else if (server.equalsIgnoreCase("smp")) {
+		smpBan(player);
+	    } else if (server.equalsIgnoreCase("onslaught")) {
 		event.respond(onslaughtBan(player));
-	    case "pvp":
+	    } else if (server.equalsIgnoreCase("pvp")) {
 		event.respond(pvpBan(player));
+	    } else {
+		event.respond(event.getUser().getNick() + "Unknown paramater [2] Server doesn't exist! !checkban [player] [smp|pvp|battle|onslaught]");
 	    }
 	}
-	
+
     }
 
     private String pvpBan(String player) {
 	ResultSet rs = null;
-	String query = "SELECT * FROM `mb_bans_pvp` WHERE `banned` = '" + player + "';";
+	String query = "SELECT * FROM `bm_bans_pvp` WHERE `banned` = '" + player + "';";
 	try {
+	    rs = UtilDB.query(query);
 	    rs.next();
-	    if(rs.getString(player) != null) return player + " is banned frm PvP.";
+	    if(rs.getString(player) != null) return player + " is banned from PvP, banned by " + rs.getString("banned_by") + " for the reason of '" + rs.getString("ban_reason") + "'.";
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
-	
+
 	return player + " is not banned from PvP.";
     }
 
@@ -47,12 +50,13 @@ public class CheckBanCommand extends ListenerAdapter {
 	ResultSet rs = null;
 	String query = "SELECT * FROM `mb_bans_onslaught` WHERE `banned` = '" + player + "';";
 	try {
+	    rs = UtilDB.query(query);
 	    rs.next();
-	    if(rs.getString(player) != null) return player + " is banned from Onslaught, banned by " + rs.getString("banned_by");
+	    if(rs.getString(player) != null) return player + " is banned from Onslaught, banned by " + rs.getString("banned_by") + " for the reason of '" + rs.getString("ban_reason") + "'.";
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
-	
+
 	return player + " is not banned from PvP.";
     }
 
@@ -60,12 +64,13 @@ public class CheckBanCommand extends ListenerAdapter {
 	ResultSet rs = null;
 	String query = "SELECT * FROM `mb_bans_smp` WHERE `banned` = '" + player + "';";
 	try {
+	    rs = UtilDB.query(query);
 	    rs.next();
-	    if(rs.getString(player) != null) return player + " is banned from SMP, banned by " + rs.getString("banned_by");
+	    if(rs.getString(player) != null) return player + " is banned from SMP, banned by " + rs.getString("banned_by") + " for the reason of '" + rs.getString("ban_reason") + "'.";
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
-	
+
 	return player + " is not banned from PvP.";
     }
 
@@ -73,13 +78,14 @@ public class CheckBanCommand extends ListenerAdapter {
 	ResultSet rs = null;
 	String query = "SELECT * FROM `mb_bans_battles` WHERE `banned` = '" + player + "';";
 	try {
+	    rs = UtilDB.query(query);
 	    rs.next();
-	    if(rs.getString(player) != null) return player + " is banned from Battles, banned by " + rs.getString("banned_by");
+	    if(rs.getString(player) != null) return player + " is banned from Battles, banned by " + rs.getString("banned_by") + " for the reason of '" + rs.getString("ban_reason") + "'.";
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
-	
+
 	return player + " is not banned from Battles.";
     }
-    
+
 }
