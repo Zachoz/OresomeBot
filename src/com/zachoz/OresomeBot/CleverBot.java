@@ -16,7 +16,7 @@ public class CleverBot extends ListenerAdapter {
     private ChatterBot cleverbot;
     private ChatterBotSession botsession;
 
-    public static boolean cleverbotEnabled = true;
+    public static boolean cleverbotEnabled = false;
 
     public CleverBot() throws Exception {
         factory = new ChatterBotFactory();
