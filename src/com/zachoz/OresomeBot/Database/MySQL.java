@@ -24,12 +24,12 @@ public class MySQL extends Database {
     private String database = "minecraft";
 
     public MySQL(Logger log,
-                 String prefix,
-                 String hostname,
-                 String portnmbr,
-                 String database,
-                 String username,
-                 String password) {
+            String prefix,
+            String hostname,
+            String portnmbr,
+            String database,
+            String username,
+            String password) {
         super(log, prefix, "[MySQL] ");
         this.hostname = hostname;
         this.portnmbr = portnmbr;
@@ -103,12 +103,12 @@ public class MySQL extends Database {
             result = statement.executeQuery("SELECT CURTIME()");
 
             switch (this.getStatement(query)) {
-                case SELECT:
-                    result = statement.executeQuery(query);
-                    break;
+            case SELECT:
+                result = statement.executeQuery(query);
+                break;
 
-                default:
-                    statement.executeUpdate(query);
+            default:
+                statement.executeUpdate(query);
             }
             //connection.close();
             return result;
