@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import code.husky.UtilDB;
+import com.zachoz.huskutil.UtilDB;
+
 
 public class CheckBanCommand extends ListenerAdapter {
 

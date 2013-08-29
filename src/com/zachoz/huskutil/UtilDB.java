@@ -1,4 +1,4 @@
-package code.husky;
+package com.zachoz.huskutil;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
