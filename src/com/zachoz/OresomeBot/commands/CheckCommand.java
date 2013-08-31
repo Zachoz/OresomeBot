@@ -13,12 +13,12 @@ public class CheckCommand extends ListenerAdapter {
 
         String[] line = event.getMessage().split(" ");
 
-        if (event.getMessage().contains(".check ")) {
+        if (event.getMessage().startsWith(".check ")) {
             try {
                 InetAddress checkme = InetAddress.getByName(line[1]);
-                event.respond("Host name : " + checkme.getHostName());
+                event.respond("Host name : " + checkme.getCanonicalHostName());
             } catch (UnknownHostException e) {
-                event.respond("Either you're retarded or this guy has hacks.");
+                event.respond("Invalid host name or IP address");
             }
         }
     }
