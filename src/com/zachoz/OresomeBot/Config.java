@@ -18,6 +18,7 @@ public class Config {
     static String serverpassword;
     static boolean SSL;
     static int messagedelay;
+    public static String siteURL;
     static String[] channels;
     public static String[] admins;
     static String primarychannel;
@@ -41,6 +42,7 @@ public class Config {
         channels = config.getProperty("channels").split(",");
         messagedelay = Integer.parseInt(config.getProperty("messagedelay"));
         admins = config.getProperty("admins").split(",");
+        siteURL = config.getProperty("site_url");
 
         mysql_host = config.getProperty("mysql_host");
         mysql_db = config.getProperty("mysql_db");
