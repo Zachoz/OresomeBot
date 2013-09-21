@@ -67,6 +67,9 @@ public class OresomeBot {
             // Setup MySQL DB.
             setupDatabase();
 
+            RelayTellMessages.mysql.open();
+            SeenManager.mysql.open();
+
         } catch (IrcException e) {
             // TODO: Fix itself? I dunno...
         } catch (IOException e) {
