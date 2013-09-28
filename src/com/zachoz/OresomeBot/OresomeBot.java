@@ -119,6 +119,7 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new GoogleCommand());
         bot.getListenerManager().addListener(new SendRawLineCommand());
         bot.getListenerManager().addListener(new StatsCommand());
+        bot.getListenerManager().addListener(new MCPingCommand());
 
         try {
             bot.getListenerManager().addListener(new CleverBot());
