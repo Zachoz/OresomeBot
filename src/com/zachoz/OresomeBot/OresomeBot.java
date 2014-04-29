@@ -58,8 +58,6 @@ public class OresomeBot {
 
             // Set bot message delay
             bot.setMessageDelay(Config.messagedelay);
-            // Auto reconnect to IRC server if disconnected
-            bot.setAutoReconnect(true);
             // Auto rejoin channels if disconnected
             bot.setAutoReconnectChannels(true);
             // Join channels specified in config.
@@ -107,12 +105,12 @@ public class OresomeBot {
         bot.getListenerManager().addListener(new SayCommand());
         bot.getListenerManager().addListener(new NickCommand());
         bot.getListenerManager().addListener(new TellCommand());
-        bot.getListenerManager().addListener(new AutoopCommand());
-        bot.getListenerManager().addListener(new DeautoopCommand());
-        bot.getListenerManager().addListener(new AutovoiceCommand());
-        bot.getListenerManager().addListener(new DeautovoiceCommand());
-        bot.getListenerManager().addListener(new OpmeCommand());
-        bot.getListenerManager().addListener(new DeopmeCommand());
+        //bot.getListenerManager().addListener(new AutoopCommand());
+        //bot.getListenerManager().addListener(new DeautoopCommand());
+        //bot.getListenerManager().addListener(new AutovoiceCommand());
+        //bot.getListenerManager().addListener(new DeautovoiceCommand());
+        //bot.getListenerManager().addListener(new OpmeCommand());
+        //bot.getListenerManager().addListener(new DeopmeCommand());
         bot.getListenerManager().addListener(new CleverbotToggleCommand());
         bot.getListenerManager().addListener(new SeenManager());
         bot.getListenerManager().addListener(new SeenCommand());
