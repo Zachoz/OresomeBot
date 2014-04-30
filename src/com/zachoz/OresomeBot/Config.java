@@ -1,8 +1,6 @@
 package com.zachoz.OresomeBot;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 import com.zachoz.OresomeBot.Database.MySQL;
@@ -19,17 +17,13 @@ public class Config {
     static boolean SSL;
     static int messagedelay;
     public static String siteURL;
-    static String[] channels;
+    public static String[] channels;
     public static String[] admins;
-    static String primarychannel;
-    static String mysql_host;
-    static String mysql_db;
-    static String mysql_user;
-    static String mysql_password;
-    static String mysql_port;
-    public static MySQL mysql;
+    public static String primarychannel;
+    public static String oresomecraftAdminChannel;
+    public static boolean forumThreadChecker;
 
-    public static void loadConfiguration() throws FileNotFoundException, IOException {
+    public static void loadConfiguration() throws IOException {
         config.load(new FileInputStream("OresomeBot.properties"));
         nick = config.getProperty("nick");
         user = config.getProperty("user");
@@ -43,13 +37,26 @@ public class Config {
         messagedelay = Integer.parseInt(config.getProperty("messagedelay"));
         admins = config.getProperty("admins").split(",");
         siteURL = config.getProperty("site_url");
+        forumThreadChecker = Boolean.parseBoolean(config.getProperty("forum_thread_check"));
+        oresomecraftAdminChannel = config.getProperty("oresomecraft_admin_channel");
+    }
 
-        mysql_host = config.getProperty("mysql_host");
-        mysql_db = config.getProperty("mysql_db");
-        mysql_user = config.getProperty("mysql_user");
-        mysql_password = config.getProperty("mysql_password");
-        mysql_port = config.getProperty("mysql_port");
+    public static void copyConfig() {
+        InputStream stream = Config.class.getResourceAsStream("/OresomeBot.properties");
+        OutputStream resStreamOut;
+        int readBytes;
+        byte[] buffer = new byte[4096];
+        try {
+            resStreamOut = new FileOutputStream(new File("OresomeBot.properties"));
+            while ((readBytes = stream.read(buffer)) > 0) {
+                resStreamOut.write(buffer, 0, readBytes);
+            }
 
+            stream.close();
+            resStreamOut.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 
 }
