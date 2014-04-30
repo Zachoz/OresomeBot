@@ -4,16 +4,26 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import com.zachoz.OresomeBot.commands.*;
+import com.zachoz.OresomeBot.core.CommandProcessor;
+import com.zachoz.OresomeBot.core.InternalEventHandler;
+import com.zachoz.OresomeBot.oresomecraft.forums.ForumManager;
+import com.zachoz.OresomeBot.tell.TellCommands;
+import com.zachoz.OresomeBot.tell.TellManager;
+import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 import org.pircbotx.UtilSSLSocketFactory;
 import org.pircbotx.exception.IrcException;
 
 import com.zachoz.OresomeBot.Database.*;
-import com.zachoz.OresomeBot.commands.*;
 
+/*
+    OresomeBot IRC bot
+    @author Zach de Koning (Zachoz)
+ */
 public class OresomeBot {
 
-    public static PircBotX bot = new PircBotX();
+    private static PircBotX bot;
     public final static Logger logger = Logger.getLogger("OresomeBot");
 
     public static String mysql_host;
@@ -23,50 +33,59 @@ public class OresomeBot {
     public static String mysql_port;
     public static MySQL mysql;
 
+    @SuppressWarnings("rawtypes")
     public static void main(String[] args) {
 
         // Load properties file.
         try {
             Config.loadConfiguration();
         } catch (IOException ex) {
-            // This needs to generate the file if it doesn't exist.
+            System.out.println("No config file exists! Generating now!");
+            Config.copyConfig(); // Generate a new config
+            try {
+                Config.loadConfiguration();
+            } catch (Exception exception) {
+                // Yeah we can't really go on from here.
+                System.out.println("Unable to create a config file, shutting down!");
+                System.exit(1);
+            }
         }
 
+        registerCommands();
+
+        TellManager.loadMessagesFromDisk();
+
+        if (Config.forumThreadChecker) ForumManager.initiate();
+
+        // Build basic configuration
+        Configuration.Builder configurationBuilder = new Configuration.Builder()
+                .setAutoNickChange(true)
+                .setVersion("OresomeBot IRC Bot, by Zachoz.")
+                .setLogin(Config.user)
+                .setName(Config.nick)
+                .setMessageDelay(Config.messagedelay)
+                .setServerHostname(Config.server)
+                .setServerPort(Config.port)
+                .setServerPassword(Config.serverpassword);
+
+        if (!Config.password.equals("")) configurationBuilder.setNickservPassword(Config.password);
+        if (Config.SSL) configurationBuilder.setSocketFactory(new UtilSSLSocketFactory().trustAllCertificates());
+
+        // Add listeners
+        configurationBuilder.addListener(new CommandProcessor())
+                .addListener(new InternalEventHandler())
+                .addListener(new CleverBot())
+                .addListener(new TellManager());
+
+        bot = new PircBotX(configurationBuilder.buildConfiguration());
+
         try {
-            // Connection:
-            // Auto change nick if already taken.
-            bot.setAutoNickChange(true);
-            // Set bot version ("realname")
-            bot.setVersion("OresomeBot IRC Bot, by Zachoz.");
-            // Set login username.
-            bot.setLogin(Config.user);
-            // Set initial nickname
-            bot.setName(Config.nick);
-            // Identify with NickServ
-            bot.identify(Config.password);
-            // Output a TON if info to console.
-            bot.setVerbose(true);
+            bot.startBot();
 
-            // Connect to the IRC server
-            if (Config.SSL && !Config.serverpassword.isEmpty()) {
-                bot.connect(Config.server, Config.port, Config.serverpassword, new UtilSSLSocketFactory().trustAllCertificates());
-            } else if (Config.SSL && Config.serverpassword.isEmpty()) {
-                bot.connect(Config.server, Config.port, new UtilSSLSocketFactory().trustAllCertificates());
-            } else {
-                bot.connect(Config.server, Config.port);
-            }
+            //setupDatabase();
 
-            // Set bot message delay
-            bot.setMessageDelay(Config.messagedelay);
-            // Auto rejoin channels if disconnected
-            bot.setAutoReconnectChannels(true);
-            // Join channels specified in config.
-            joinChannels();
-            // Setup MySQL DB.
-            setupDatabase();
-
-            RelayTellMessages.mysql.open();
-            SeenManager.mysql.open();
+            //RelayTellMessages.mysql.open();
+            //SeenManager.mysql.open();
 
         } catch (IrcException e) {
             // TODO: Fix itself? I dunno...
@@ -74,92 +93,21 @@ public class OresomeBot {
             // TODO: hmm...
         }
 
-        // Load listeners
-        loadListeners();
         endCommand();
     }
 
-    public static void joinChannels() {
-        // Join specified channels
-        for (int i = 0; i < Config.channels.length; i++) {
-            bot.joinChannel(Config.channels[i]);
-        }
+    private static void registerCommands() {
+        CommandProcessor.registerCommandClass(PunishmentCommands.class);
+        CommandProcessor.registerCommandClass(AdminCommands.class);
+        CommandProcessor.registerCommandClass(MinecraftCommands.class);
+        CommandProcessor.registerCommandClass(MiscCommands.class);
+        CommandProcessor.registerCommandClass(OresomeCraftCommands.class);
+        CommandProcessor.registerCommandClass(GoogleCommand.class);
+        CommandProcessor.registerCommandClass(TellCommands.class);
     }
 
-    public static void loadListeners() {
-
-        // Load all commands & other listeners.
-        bot.getListenerManager().addListener(new ReloadCommand());
-        bot.getListenerManager().addListener(new JoinCommand());
-        bot.getListenerManager().addListener(new RelayTellMessages());
-        bot.getListenerManager().addListener(new WelcomeMessage());
-        bot.getListenerManager().addListener(new PartCommand());
-        bot.getListenerManager().addListener(new BanCommand());
-        bot.getListenerManager().addListener(new UnbanCommand());
-        bot.getListenerManager().addListener(new KickCommand());
-        bot.getListenerManager().addListener(new KickbanCommand());
-        bot.getListenerManager().addListener(new MuteCommand());
-        bot.getListenerManager().addListener(new HelpCommand());
-        bot.getListenerManager().addListener(new CheckCommand());
-        bot.getListenerManager().addListener(new InfoCommand());
-        bot.getListenerManager().addListener(new SayCommand());
-        bot.getListenerManager().addListener(new NickCommand());
-        bot.getListenerManager().addListener(new TellCommand());
-        //bot.getListenerManager().addListener(new AutoopCommand());
-        //bot.getListenerManager().addListener(new DeautoopCommand());
-        //bot.getListenerManager().addListener(new AutovoiceCommand());
-        //bot.getListenerManager().addListener(new DeautovoiceCommand());
-        //bot.getListenerManager().addListener(new OpmeCommand());
-        //bot.getListenerManager().addListener(new DeopmeCommand());
-        bot.getListenerManager().addListener(new CleverbotToggleCommand());
-        bot.getListenerManager().addListener(new SeenManager());
-        bot.getListenerManager().addListener(new SeenCommand());
-        bot.getListenerManager().addListener(new GoogleCommand());
-        bot.getListenerManager().addListener(new SendRawLineCommand());
-        bot.getListenerManager().addListener(new StatsCommand());
-        bot.getListenerManager().addListener(new MCPingCommand());
-        bot.getListenerManager().addListener(new MCHasPaidCommand());
-
-        try {
-            bot.getListenerManager().addListener(new CleverBot());
-        } catch (Exception e) {
-            // yay, no channel spam
-        }
-
-    }
-
-    private static void setupDatabase() {
-        mysql_host = Config.mysql_host;
-        mysql_db = Config.mysql_db;
-        mysql_user = Config.mysql_user;
-        mysql_password = Config.mysql_password;
-        mysql_port = Config.mysql_port;
-
-        mysql = new MySQL(logger, "[OresomeBot]", mysql_host, mysql_port,
-                mysql_db, mysql_user, mysql_password);
-
-        System.out.println("Connecting to MySQL database...");
-        mysql.open();
-
-        if (mysql.checkConnection()) {
-            System.out.println("Successfully connected to database!");
-
-            if (!mysql.checkTable("tellmessages")) {
-                System.out.println("Creating table 'tellmessages' in database " + mysql_db);
-                mysql.createTable("CREATE TABLE tellmessages ( id int NOT NULL AUTO_INCREMENT, channel VARCHAR(32) NOT NULL, sender VARCHAR(32) NOT NULL, recipient VARCHAR(32) NOT NULL, message VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
-            }
-            if (!mysql.checkTable("oresomejoinedusers")) {
-                System.out.println("Creating table 'oresomejoinedusers' in database " + mysql_db);
-                mysql.createTable("CREATE TABLE oresomejoinedusers (id int NOT NULL AUTO_INCREMENT, users VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
-            }
-            if (!mysql.checkTable("seenusers")) {
-                System.out.println("Creating table 'seenusers' in database " + mysql_db);
-                mysql.createTable("CREATE TABLE seenusers (id int NOT NULL AUTO_INCREMENT, user VARCHAR(32) NOT NULL, lastseen VARCHAR(32) NOT NULL, PRIMARY KEY (id) ) ENGINE=MyISAM;");
-            }
-        } else {
-            System.out.println("Error connecting to database, there'll most likely be a lot of console errors!!");
-        }
-        mysql.close();
+    public static PircBotX getBot() {
+        return bot;
     }
 
     public static void endCommand() {
@@ -167,8 +115,8 @@ public class OresomeBot {
         String command = reader.nextLine();
         if (command.equals("end")) {
             // Yes this is dodgy, I'll fix it later, but at least the damn thing stops!
-            bot.disconnect();
-            bot.shutdown();
+            bot.stopBotReconnect();
+            bot.sendIRC().quitServer("Shutting down");
             System.out.println("Bot shutting down! Cya!");
             System.exit(0);
         }

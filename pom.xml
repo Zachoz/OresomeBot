@@ -22,7 +22,13 @@
         <dependency>
             <groupId>org.pircbotx</groupId>
             <artifactId>pircbotx</artifactId>
-            <version>1.9</version>
+            <version>2.0.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.7</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -38,6 +44,11 @@
             <type>jar</type>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom</artifactId>
+            <version>1.1</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -48,6 +59,16 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <sourceDirectory>src</sourceDirectory>
+        <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/</directory>
+                <includes>
+                    <include>OresomeBot.properties</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -79,10 +100,18 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
+                                    <!-- PircBotX dependencies -->
                                     <include>org.pircbotx:pircbotx</include>
+                                    <include>org.apache.commons:commons-lang3</include>
+                                    <include>org.slf4j:slf4j-simple</include>
+                                    <include>org.slf4j:slf4j-api</include>
+                                    <include>commons-codec:commons-codec</include>
+                                    <include>com.google.guava:guava</include>
+
                                     <include>mysql:mysql-connector-java</include>
                                     <include>com.google.code:chatter-bot-api</include>
                                     <include>com.google.code.gson:gson</include>
+                                    <include>org.jdom:jdom</include>
                                 </includes>
                             </artifactSet>
                         </configuration>

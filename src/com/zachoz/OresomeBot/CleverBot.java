@@ -1,5 +1,6 @@
 package com.zachoz.OresomeBot;
 
+import com.zachoz.OresomeBot.core.Utility;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.*;
 
@@ -7,7 +8,6 @@ import com.google.code.chatterbotapi.ChatterBot;
 import com.google.code.chatterbotapi.ChatterBotFactory;
 import com.google.code.chatterbotapi.ChatterBotSession;
 import com.google.code.chatterbotapi.ChatterBotType;
-import com.zachoz.OresomeBot.OresomeBot;
 
 @SuppressWarnings("rawtypes")
 public class CleverBot extends ListenerAdapter {
@@ -18,29 +18,24 @@ public class CleverBot extends ListenerAdapter {
 
     public static boolean cleverbotEnabled = true;
 
-    public CleverBot() throws Exception {
-        factory = new ChatterBotFactory();
-        cleverbot = factory.create(ChatterBotType.CLEVERBOT);
-        botsession = cleverbot.createSession();
+    public CleverBot() {
+        try {
+            factory = new ChatterBotFactory();
+            cleverbot = factory.create(ChatterBotType.CLEVERBOT);
+            botsession = cleverbot.createSession();
+            System.out.println("CleverBot successfully initiated!");
+        } catch (Exception ex) {
+            System.out.println("Failed to initiate CleverBot!");
+            ex.printStackTrace();
+        }
     }
 
     public void onMessage(MessageEvent event) throws Exception {
-        String message = event.getMessage();
-        String[] ArrSay = message.split(" ");
-        String outsay = "";
-
-        for (int i = 1; i < ArrSay.length; i++) {
-            outsay += ArrSay[i];
-
-        }
-
-        if (event.getMessage().startsWith(OresomeBot.bot.getNick() + ": ") ||
-                event.getMessage().startsWith(OresomeBot.bot.getNick() + ", ")) {
+        if (event.getMessage().startsWith(OresomeBot.getBot().getNick() + ": ") ||
+                event.getMessage().startsWith(OresomeBot.getBot().getNick() + ", ")) {
             if (cleverbotEnabled) {
-
-                String s = botsession.think(outsay);
+                String s = botsession.think(Utility.getJoinedStrings(1, event.getMessage().split(" ")));
                 event.respond(s);
-
             }
         }
 
