@@ -107,9 +107,11 @@ public class CommandProcessor extends ListenerAdapter {
         if (level == PermissionLevel.REGULAR) return true;
         else if (level == PermissionLevel.VOICE && channel != null && (channel.hasVoice(user) || channel.isOp(user) || channel.isSuperOp(user)))
             return true;
-        else if (level == PermissionLevel.OPERATOR && channel != null && (channel.isOp(user) || channel.isSuperOp(user))) return true;
+        else if (level == PermissionLevel.OPERATOR && channel != null && (channel.isOp(user) || channel.isSuperOp(user)))
+            return true;
         else if (level == PermissionLevel.SUPER_OPERATOR && channel != null && (channel.isSuperOp(user))) return true;
-        else if (level == PermissionLevel.BOT_ADMIN) return Arrays.asList(Config.admins).contains(user.getNick());
+        else if (level == PermissionLevel.BOT_ADMIN)
+            return Arrays.asList(Config.admins).contains(user.getNick()) && user.isVerified();
         return false;
     }
 

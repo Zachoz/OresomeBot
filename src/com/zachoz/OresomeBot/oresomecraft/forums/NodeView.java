@@ -4,7 +4,11 @@ import org.jdom.Document;
 import org.jdom.input.SAXBuilder;
 import org.jdom.Element;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class NodeView implements Cloneable {
@@ -23,24 +27,40 @@ public class NodeView implements Cloneable {
         Document document;
 
         try {
+            // Get the forum views
             URL url = new URL("http://web.oresomecraft.com/forums/forums/." + this.nodeId + "/index.rss");
-            document = builder.build(url);
+            URLConnection urlConnection = url.openConnection();
+            urlConnection.setReadTimeout(5000); // 5 seconds
+            urlConnection.setConnectTimeout(5000); // 5 seconds
 
-            // Set forum info
-            Element nodeDetails = (Element) document.getRootElement().getChildren("channel").get(0);
-            this.title = nodeDetails.getChildText("title");
-            this.description = nodeDetails.getChildText("description");
-            this.link = nodeDetails.getChildText("link");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
-            // Get threads
-            for (Object item : nodeDetails.getChildren("item")) {
-                Element element = (Element) item;
-                String title = element.getChildText("title");
-                String date = element.getChildText("pubDate");
-                String link = element.getChildText("link");
-                String author = element.getChildText("author");
+            final StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) stringBuilder.append(line);
 
-                this.threads.add(new ForumThread(this.nodeId, title, link, date, author)) ;
+            bufferedReader.close();
+
+            if (!stringBuilder.toString().equals("")) {
+                // Build the views
+                document = builder.build(new StringReader(stringBuilder.toString()));
+
+                // Set forum info
+                Element nodeDetails = (Element) document.getRootElement().getChildren("channel").get(0);
+                this.title = nodeDetails.getChildText("title");
+                this.description = nodeDetails.getChildText("description");
+                this.link = nodeDetails.getChildText("link");
+
+                // Get threads
+                for (Object item : nodeDetails.getChildren("item")) {
+                    Element element = (Element) item;
+                    String title = element.getChildText("title");
+                    String date = element.getChildText("pubDate");
+                    String link = element.getChildText("link");
+                    String author = element.getChildText("author");
+
+                    this.threads.add(new ForumThread(this.nodeId, title, link, date, author));
+                }
             }
 
         } catch (Exception ex) {
