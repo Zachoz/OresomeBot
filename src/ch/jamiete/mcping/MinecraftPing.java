@@ -34,6 +34,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+
 import com.google.gson.Gson;
 
 public class MinecraftPing {
@@ -41,10 +42,10 @@ public class MinecraftPing {
     /**
      * Fetches a {@link MinecraftPingReply} for the supplied hostname.
      * <b>Assumed timeout of 2s and port of 25565.</b>
-     * 
+     *
      * @param hostname - a valid String hostname
      * @return {@link MinecraftPingReply}
-     * @throws IOException 
+     * @throws IOException
      */
     public MinecraftPingReply getPing(final String hostname) throws IOException {
         return this.getPing(new MinecraftPingOptions().setHostname(hostname));
@@ -52,10 +53,10 @@ public class MinecraftPing {
 
     /**
      * Fetches a {@link MinecraftPingReply} for the supplied options.
-     * 
+     *
      * @param options - a filled instance of {@link MinecraftPingOptions}
      * @return {@link MinecraftPingReply}
-     * @throws IOException 
+     * @throws IOException
      */
     public MinecraftPingReply getPing(final MinecraftPingOptions options) throws IOException {
         MinecraftPingUtil.validate(options.getHostname(), "Hostname cannot be null.");
