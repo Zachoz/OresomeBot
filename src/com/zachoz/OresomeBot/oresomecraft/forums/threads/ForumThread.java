@@ -1,4 +1,4 @@
-package com.zachoz.OresomeBot.oresomecraft.forums;
+package com.zachoz.OresomeBot.oresomecraft.forums.threads;
 
 public class ForumThread {
 

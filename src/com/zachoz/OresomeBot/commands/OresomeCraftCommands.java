@@ -5,8 +5,8 @@ import com.google.gson.JsonParser;
 import com.zachoz.OresomeBot.core.ChannelCommand;
 import com.zachoz.OresomeBot.core.PermissionLevel;
 import com.zachoz.OresomeBot.oresomecraft.forums.ForumManager;
-import com.zachoz.OresomeBot.oresomecraft.forums.ForumThread;
-import com.zachoz.OresomeBot.oresomecraft.forums.NodeView;
+import com.zachoz.OresomeBot.oresomecraft.forums.threads.ForumThread;
+import com.zachoz.OresomeBot.oresomecraft.forums.threads.NodeView;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import java.io.BufferedReader;
@@ -22,8 +22,13 @@ public class OresomeCraftCommands {
             usage = ".news",
             permissionLevel = PermissionLevel.REGULAR)
     public static void latestNews(MessageEvent event, String[] args) {
-        ForumThread thread = new NodeView(ForumManager.NEWS_NODE_ID).build().getThreads().get(0);
-        event.respond("Latest news: " + thread.getTitle() + " - " + thread.getLink());
+        try {
+            ForumThread thread = new NodeView(ForumManager.NEWS_NODE_ID).build().getThreads().get(0);
+            event.respond("Latest news: " + thread.getTitle() + " - " + thread.getLink());
+        } catch (Exception ex) {
+            event.respond("An error occured while trying to fetch latest news!");
+            ex.printStackTrace();
+        }
     }
 
     @ChannelCommand(name = "stats",

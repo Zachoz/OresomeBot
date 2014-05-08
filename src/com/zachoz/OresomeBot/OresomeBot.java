@@ -104,6 +104,7 @@ public class OresomeBot {
         CommandProcessor.registerCommandClass(OresomeCraftCommands.class);
         CommandProcessor.registerCommandClass(GoogleCommand.class);
         CommandProcessor.registerCommandClass(TellCommands.class);
+        CommandProcessor.registerCommandClass(ForumCommands.class);
     }
 
     public static PircBotX getBot() {
