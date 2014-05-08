@@ -59,7 +59,7 @@ public class TellManager extends ListenerAdapter {
             out.writeObject(messages);
             out.close();
             fileOut.close();
-            System.out.printf("Serialised messages!");
+            System.out.println("Serialised messages!");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

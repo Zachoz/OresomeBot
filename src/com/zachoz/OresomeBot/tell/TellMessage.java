@@ -10,7 +10,7 @@ public class TellMessage implements Serializable {
     public TellMessage(String sender, String recipient, String message, MessageType type) {
         this.sender = sender;
         this.recipient = recipient;
-        this.message= message;
+        this.message = message;
         this.type = type;
     }
 
