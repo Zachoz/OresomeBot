@@ -6,6 +6,7 @@ import com.zachoz.OresomeBot.oresomecraft.forums.ForumAccount;
 import com.zachoz.OresomeBot.oresomecraft.forums.ForumManager;
 import com.zachoz.OresomeBot.oresomecraft.forums.alerts.Alert;
 import com.zachoz.OresomeBot.oresomecraft.forums.alerts.AlertManager;
+import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
 import java.util.ArrayList;
@@ -114,9 +115,7 @@ public class ForumCommands {
             description = "Lists logged in forum users",
             permissionLevel = PermissionLevel.BOT_ADMIN)
     public static void forumusers(PrivateMessageEvent event, String[] args) {
-        String users = "None.";
-        for (String s : ForumManager.forumAccounts.keySet()) users += (s + ", ");
-        event.respond("Logged in users:" + users);
+        event.respond("Logged in users:" + StringUtils.join(ForumManager.forumAccounts.keySet(), ", "));
     }
 
 }
