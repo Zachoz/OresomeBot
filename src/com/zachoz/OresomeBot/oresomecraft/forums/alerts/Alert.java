@@ -50,7 +50,7 @@ public class Alert {
 
     public synchronized String getUrl() {
         if (AlertType.threadBased(this.type)) {
-            return ForumManager.ORESOMECRAFT_FORUMS_URL + "threads/." + getThreadId() + "/#post-" + getPostId();
+            return ForumManager.ORESOMECRAFT_FORUMS_URL + "posts/" + getPostId();
         } else if (this.type == AlertType.PROFILE_POST || this.type == AlertType.PROFILE_LIKE) {
             return ForumManager.ORESOMECRAFT_FORUMS_URL + "members/." + account.getForumId() + "/#profile-post-" + getPostId();
         } else {
